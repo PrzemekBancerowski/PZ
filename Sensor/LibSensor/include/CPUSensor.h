@@ -23,7 +23,7 @@ public:
     virtual ~CPUSensor();
     virtual Json::Value GetMetaData() const;
     virtual std::string GetTypeName() const;
-    virtual Json::Value Run() const;
+    virtual Json::Value GetData() const;
 
 private:
     unsigned _interval;

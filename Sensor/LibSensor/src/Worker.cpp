@@ -2,10 +2,27 @@
 // Created by pSolT on 23.04.16.
 //
 
+#include <sigar.h>
+#include <iomanip>
+#include <boost/algorithm/hex.hpp>
 #include "../include/Worker.h"
 
 Worker::Worker() {
+    sigar_t * sigar;
+    sigar_open(&sigar);
 
+    sigar_net_interface_config_t netIfCfg;
+
+    sigar_net_interface_config_primary_get(sigar, &netIfCfg);
+
+
+    std::string res;
+    boost::algorithm::hex(netIfCfg.hwaddr.addr.mac, netIfCfg.hwaddr.addr.mac + 6, back_inserter(res));
+
+
+    _id =res;
+
+    sigar_close(sigar);
 }
 
 Worker& Worker::AddSensor(ISensor *sensor)
@@ -15,7 +32,27 @@ Worker& Worker::AddSensor(ISensor *sensor)
 }
 
 
+Json::Value Worker::RunOnce()
+{
+    Json::Value json;
 
+    Json::Value data;
+    Json::Value metaData;
+
+    data["ID"] = _id;
+
+    for(int i=0;i<_sensors.size();i++)
+    {
+        data[_sensors[i]->GetTypeName()] = _sensors[i]->GetData();
+        metaData[_sensors[i]->GetTypeName()] = _sensors[i]->GetMetaData();
+    }
+
+    json["data"] = data;
+    json["metadata"] = metaData;
+
+    return json;
+
+}
 
 void Worker::run()
 {
@@ -28,10 +65,22 @@ void Worker::run()
         std::chrono::steady_clock::time_point tp = std::chrono::steady_clock::now() + std::chrono::milliseconds(_dataInterval);
 
         //zbierz dane
+        Json::Value json;
+
+        Json::Value data;
+        Json::Value metaData;
+
+        data["ID"] = _id;
+
         for(int i=0;i<_sensors.size();i++)
         {
-            json[_sensors[i]->GetTypeName()] = _sensors[i]->Run();
+            data[_sensors[i]->GetTypeName()] = _sensors[i]->GetData();
+            metaData[_sensors[i]->GetTypeName()] = _sensors[i]->GetMetaData();
         }
+
+        json["data"] = data;
+        json["metadata"] = metaData;
+
 
 
 

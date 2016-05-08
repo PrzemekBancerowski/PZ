@@ -8,6 +8,8 @@
 #include "LibSensor/include/NetIFSensor.h"
 #include "LibSensor/include/MemorySensor.h"
 #include "LibSensor/include/DiskSensor.h"
+#include "LibSensor/include/ProcSensor.h"
+#include "LibSensor/include/SystemSensor.h"
 #include "LibSensor/include/Worker.h"
 #include "LibSensor/include/UDPServer.h"
 #include "LibSensor/include/Util.h"
@@ -33,6 +35,8 @@ int main()
     bool isCPUused = components["cpu"].as<bool>();
     bool isMemoryUsed = components["memory"].as<bool>();
     bool isNetIFUsed = components["netIF"].as<bool>();
+    bool isProcUsed = components["proc"].as<bool>();
+    bool isSystemUsed = components["system"].as<bool>();
 
     bool isDebugMode = other["debug"].as<bool>();
 
@@ -63,6 +67,16 @@ int main()
         ISensor * netIFSensor = new NetIFSensor();
         worker.AddSensor(netIFSensor);
     }
+    if(isProcUsed)
+    {
+        ISensor * procSensor = new ProcSensor();
+        worker.AddSensor(procSensor);
+    }
+    if(isSystemUsed)
+    {
+        ISensor * systemSensor = new SystemSensor();
+        worker.AddSensor(systemSensor);
+    }
 
     worker.SetDataInterval(std::stoi(data_interval));
     worker.SetMetadataInterval(std::stoi(metadata_interval));
@@ -87,6 +101,15 @@ int main()
         }
 
     }
+
+
+//    ISensor * procSensor = new ProcSensor();
+//    worker.AddSensor(procSensor);
+//    ISensor * systemSensor = new SystemSensor();
+//    worker.AddSensor(systemSensor);
+//
+//    std::cout << worker.RunOnce().toStyledString() << std::endl;
+
 
     return 0;
 

@@ -12,7 +12,7 @@
 class DiskSensor : public ISensor {
 public:
     DiskSensor();
-    virtual Json::Value Run() const;
+    virtual Json::Value GetData() const;
     virtual Json::Value GetMetaData() const;
     virtual std::string GetTypeName() const;
     virtual ~DiskSensor();

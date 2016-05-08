@@ -39,7 +39,7 @@ Json::Value MemorySensor::GetMetaData() const
 }
 
 
-Json::Value MemorySensor::Run() const
+Json::Value MemorySensor::GetData() const
 {
     Json::Value data;
 

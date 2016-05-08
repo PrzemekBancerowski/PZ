@@ -65,7 +65,7 @@ Json::Value DiskSensor::GetMetaData() const
     return metaData;
 }
 
-Json::Value DiskSensor::Run() const
+Json::Value DiskSensor::GetData() const
 {
 
 

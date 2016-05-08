@@ -20,6 +20,7 @@ public:
     Worker();
     Worker& AddSensor(ISensor * sensor);
     void run();
+    Json::Value RunOnce();
     void SetTargetHost(std::string targetHost);
     std::string GetTargetHost() const;
     void SetTargetPort(std::string targetPort);
@@ -33,6 +34,7 @@ public:
 
 private:
     std::vector<std::unique_ptr<ISensor>> _sensors;
+    std::string _id;
     unsigned _dataInterval;
     unsigned _metadataInterval;
     std::string _targetHost;

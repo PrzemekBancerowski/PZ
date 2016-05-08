@@ -55,7 +55,7 @@ Json::Value CPUSensor::GetMetaData() const
     return metaData;
 }
 
-Json::Value CPUSensor::Run() const
+Json::Value CPUSensor::GetData() const
 {
 
     Json::Value root;

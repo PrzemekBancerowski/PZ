@@ -13,7 +13,7 @@ public:
     virtual ~NetIFSensor();
     virtual Json::Value GetMetaData() const;
     virtual std::string GetTypeName() const;
-    virtual Json::Value Run() const;
+    virtual Json::Value GetData() const;
 };
 
 

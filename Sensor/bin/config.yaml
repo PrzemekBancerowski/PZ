@@ -8,5 +8,7 @@ components:
   cpu: true
   memory: true
   netIF: true
+  system: true
+  proc: true
 other:
   debug: true

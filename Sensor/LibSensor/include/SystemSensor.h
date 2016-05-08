@@ -11,7 +11,7 @@ class SystemSensor : public ISensor{
 public:
     SystemSensor();
     virtual ~SystemSensor();
-    virtual Json::Value Run() const;
+    virtual Json::Value GetData() const;
     virtual Json::Value GetMetaData() const;
     virtual std::string GetTypeName() const;
 };
