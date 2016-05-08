@@ -14,6 +14,8 @@ add_executable(Sensor ${SOURCE_FILES})
 
 
 target_link_libraries(Sensor CPUSensor)
+target_link_libraries(Sensor boost_system)
+target_link_libraries(Sensor pthread)
 target_link_libraries(Sensor sigar)
 target_link_libraries(Sensor libjsoncpp.a)
 target_link_libraries(Sensor libyaml-cpp.a)

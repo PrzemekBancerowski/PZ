@@ -9,6 +9,7 @@
 #include "LibSensor/include/MemorySensor.h"
 #include "LibSensor/include/DiskSensor.h"
 #include "LibSensor/include/Worker.h"
+#include "LibSensor/include/UDPServer.h"
 #include "LibSensor/include/Util.h"
 
 
@@ -17,45 +18,75 @@ using namespace std;
 int main()
 {
 
-    ISensor * memorySensor = new MemorySensor();
-    ISensor * cpuSensor = new CPUSensor();
-    ISensor * netIFSensor = new NetIFSensor();
-    ISensor * diskSensor = new DiskSensor();
+    YAML::Node config = YAML::LoadFile("config.yaml");
+    YAML::Node configuration = config["configuration"];
+    YAML::Node components = config["components"];
+    YAML::Node other = config["other"];
 
-    std::cout << diskSensor->GetMetaData().toStyledString() << std::endl;
-
-//
-//    Worker worker;
-//    worker.AddSensor(memorySensor).AddSensor(cpuSensor).AddSensor(netIFSensor);
-//
-//    std::cout <<  worker.run().toStyledString() << std::endl;
+    const std::string name = configuration["name"].as<std::string>();
+    const std::string host = configuration["host"].as<std::string>();
+    const std::string port = configuration["port"].as<std::string>();
+    const std::string data_interval = configuration["data_interval"].as<std::string>();
+    const std::string metadata_interval = configuration["metadata_interval"].as<std::string>();
 
 
+    bool isCPUused = components["cpu"].as<bool>();
+    bool isMemoryUsed = components["memory"].as<bool>();
+    bool isNetIFUsed = components["netIF"].as<bool>();
+
+    bool isDebugMode = other["debug"].as<bool>();
+
+    std::cout   << "NAME: "                 << name     << std::endl
+                << "IP: "                   << host       << std::endl
+                << "port: "                 << port     << std::endl
+                << "data_interval: "        << data_interval << std::endl
+                << "metadata_interval: "    << metadata_interval << std::endl
+                << "Is cpu used: "          << isCPUused     << std::endl
+                << "Is mem used: "          << isMemoryUsed << std::endl
+                << "Is netIF used: "        << isNetIFUsed << std::endl;
 
 
-//    YAML::Node config = YAML::LoadFile("config.yaml");
-//    YAML::Node configuration = config["configuration"];
-//    YAML::Node components = config["components"];
-//
-//    const std::string name = configuration["name"].as<std::string>();
-//    const std::string ip = configuration["ip"].as<std::string>();
-//    const std::string port = configuration["port"].as<std::string>();
-//    const std::string data_interval = configuration["data_interval"].as<std::string>();
-//    const std::string metadata_interval = configuration["metadata_interval"].as<std::string>();
-//
-//
-//    bool isCPUused = components["cpu"].as<bool>();
-//    bool isMemoryUsed = components["memory"].as<bool>();
-//    bool isNetIFUsed = components["netIF"].as<bool>();
-//
-//    std::cout   << "NAME: "                 << name     << std::endl
-//                << "IP: "                   << ip       << std::endl
-//                << "port: "                 << port     << std::endl
-//                << "data_interval: "        << data_interval << std::endl
-//                << "metadata_interval: "    << metadata_interval << std::endl
-//                << "Is cpu used: "          << isCPUused     << std::endl
-//                << "Is mem used: "          << isMemoryUsed << std::endl
-//                << "Is netIF used: "        << isNetIFUsed << std::endl;
+
+    Worker worker;
+    if(isCPUused)
+    {
+        ISensor * cpuSensor = new CPUSensor();
+        worker.AddSensor(cpuSensor);
+    }
+    if(isMemoryUsed)
+    {
+        ISensor * memorySensor = new MemorySensor();
+        worker.AddSensor(memorySensor);
+    }
+    if(isNetIFUsed)
+    {
+        ISensor * netIFSensor = new NetIFSensor();
+        worker.AddSensor(netIFSensor);
+    }
+
+    worker.SetDataInterval(std::stoi(data_interval));
+    worker.SetMetadataInterval(std::stoi(metadata_interval));
+    worker.SetName(name);
+    worker.SetTargetHost(host);
+    worker.SetTargetPort(port);
+
+    std::thread workerThread(&Worker::run, std::ref(worker));
+
+    workerThread.detach();
+    if(isDebugMode)
+    {
+        try
+        {
+            boost::asio::io_service io_service;
+            UDPServer server(io_service, 9999);
+            io_service.run();
+        }
+        catch (std::exception& e)
+        {
+            std::cerr << e.what() << std::endl;
+        }
+
+    }
 
     return 0;
 
