@@ -86,9 +86,10 @@ int main()
 
     std::thread workerThread(&Worker::run, std::ref(worker));
 
-    workerThread.detach();
+
     if(isDebugMode)
     {
+        workerThread.detach();
         try
         {
             boost::asio::io_service io_service;
@@ -100,6 +101,10 @@ int main()
             std::cerr << e.what() << std::endl;
         }
 
+    }
+    else
+    {
+        workerThread.join();
     }
 
 

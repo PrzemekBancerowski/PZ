@@ -60,7 +60,6 @@ Json::Value NetIFSensor::GetData() const
 
     for(int i=0;i<ifList.number;i++)
     {
-        std::cout << ifList.data[i] << std::endl;
         Json::Value parameters;
 
         sigar_net_interface_stat_get(sigarNet,ifList.data[i], &stat);

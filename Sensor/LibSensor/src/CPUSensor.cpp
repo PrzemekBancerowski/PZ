@@ -37,10 +37,6 @@ Json::Value CPUSensor::GetMetaData() const
 
     sigar_cpu_info_list_get(sigar_cpu, &cpuInfoList);
 
-    std::cout << cpuInfoList.number << std::endl;
-    std::cout << cpuInfoList.size << std::endl;
-
-
     metaData["vendor"] = cpuInfoList.data[0].vendor;
     metaData["model"] = cpuInfoList.data[0].model;
     metaData["total_cores"] = cpuInfoList.data[0].total_cores;

@@ -20,7 +20,7 @@ private:
     void HandleReceive(const boost::system::error_code& error, std::size_t bytesTransferred);
     udp::socket _socket;
     udp::endpoint _remote_endpoint;
-    boost::array<char, 1024> _recv_buffer;
+    boost::array<char, 4096> _recv_buffer;
 };
 
 
