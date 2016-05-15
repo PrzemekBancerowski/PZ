@@ -2,7 +2,10 @@ package org.pz.listener;
 
 import java.io.Serializable;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 
 /**
  *
@@ -10,12 +13,12 @@ import javax.persistence.Id;
  */
 @Entity
 public class Test implements Serializable {
-    
+
     @Id
- //   @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private String name; 
-    
+    private String name;
+
     public Integer getId() {
         return id;
     }
@@ -31,9 +34,9 @@ public class Test implements Serializable {
     public void setName(String name) {
         this.name = name;
     }
-    
+
     @Override
-    public String toString(){
+    public String toString() {
         return "Test[id=" + id + ",name=" + name + "]";
     }
 }
