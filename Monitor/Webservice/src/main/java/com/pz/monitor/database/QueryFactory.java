@@ -37,8 +37,8 @@ public class QueryFactory {
         String sqlQuery =
                         " SELECT " + request.measurement + " as val FROM " + DatabaseTables.SENSOR_DETAILS_TABLE +
                         " WHERE " + SENSOR_DETAILS.createdOn + " > " + request.startTime +
-                        " AND " + SENSOR_DETAILS.createdOn + " < " + request.endTime +
-                        " AND " +  SENSOR_DETAILS.sensorId + " = '" + request.sensorId + "' " +
+                            " AND " + SENSOR_DETAILS.createdOn + " < " + request.endTime +
+                            " AND " +  SENSOR_DETAILS.sensorId + " = '" + request.sensorId + "' " +
                         " LIMIT " + request.maxCount + ";";
         return new Query(sqlQuery);
     }
