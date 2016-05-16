@@ -1,4 +1,4 @@
-package org.pz.listener;
+package org.pz.listener.model;
 
 import java.io.Serializable;
 import javax.persistence.Entity;
