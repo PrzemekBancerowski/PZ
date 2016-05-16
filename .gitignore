@@ -1,2 +1,4 @@
-/Monitor/REST/.idea/
-/Monitor/REST/REST.iml
+/Monitor/Webservice/.idea
+/Monitor/Webservice/.idea/*
+/Monitor/Webservice/Webservice.iml
+/Monitor/Webservice/target
