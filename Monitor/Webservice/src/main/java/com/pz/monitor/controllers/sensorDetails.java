@@ -23,7 +23,7 @@ public class SensorDetails extends Base {
             request.validate();
             request.reassignValues();
 
-            Query query = queryFactory.fromRequest(request);
+            Query query = db.queryFactory().fromRequest(request);
             ResultSet resultSet = db.execute(query);
             ComplexSensorDetailsResponse response = new ComplexSensorDetailsResponse(resultSet);
 
@@ -43,7 +43,7 @@ public class SensorDetails extends Base {
             request.validate();
             request.reassignValues();
 
-            Query query = queryFactory.fromRequest(request);
+            Query query = db.queryFactory().fromRequest(request);
             ResultSet resultSet = db.execute(query);
             SimpleSensorDetailsResponse response = new SimpleSensorDetailsResponse(resultSet);
 

@@ -4,12 +4,14 @@ import java.sql.*;
 
 public class Database {
     private Connection connection;
+    private QueryFactory queryFactory;
 
     public synchronized boolean connect() {
         try {
             if (connection != null && !connection.isClosed()) return true;
             Class.forName(Configuration.driver);
             connection = DriverManager.getConnection(Configuration.connectionUrl, Configuration.user, Configuration.password);
+            queryFactory = new QueryFactory(connection);
         } catch (ClassNotFoundException ex) {
             System.err.println("Driver not found");
             return false;
@@ -31,10 +33,12 @@ public class Database {
 
     public ResultSet execute(Query query) throws SQLException {
         connect();
-        Statement statement = connection.createStatement();
-        return statement.executeQuery(query.getSqlQuery());
+        return query.getStatement().executeQuery();
     }
 
+    public QueryFactory queryFactory() {
+        return queryFactory;
+    }
 
     private static class Configuration {
         private final static String driver = getPropertyOrDefault("db.driver", "org.postgresql.Driver");

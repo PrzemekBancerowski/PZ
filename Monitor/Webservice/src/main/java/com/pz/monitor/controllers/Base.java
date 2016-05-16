@@ -11,7 +11,6 @@ import static com.fasterxml.jackson.annotation.PropertyAccessor.FIELD;
 
 public abstract class Base {
     protected ObjectMapper mapper;
-    protected QueryFactory queryFactory;
 
     protected static Database db = new Database();
 
@@ -23,7 +22,6 @@ public abstract class Base {
     }
 
     protected Base() {
-        queryFactory= new QueryFactory();
         mapper = new com.fasterxml.jackson.databind.ObjectMapper();
         mapper.setVisibility(FIELD, ANY);
         mapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);

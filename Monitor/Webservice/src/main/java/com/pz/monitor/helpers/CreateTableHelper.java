@@ -3,11 +3,10 @@ package com.pz.monitor.helpers;
 import com.pz.monitor.database.DatabaseTables;
 import com.pz.monitor.database.DatabaseTables.SENSOR_DETAILS;
 import com.pz.monitor.database.DatabaseTables.SENSOR_METADATA;
-import com.pz.monitor.database.Query;
 
 public class CreateTableHelper {
 
-    public static Query initTablesQuery() {
+    public static String initTablesQuery() {
         final String createSensorTable =
                 "DROP TABLE " + DatabaseTables.SENSOR_DETAILS_TABLE+ " ;\n " +
                 "CREATE TABLE "+ DatabaseTables.SENSOR_DETAILS_TABLE+ " (\n "+
@@ -45,6 +44,6 @@ public class CreateTableHelper {
                 SENSOR_METADATA.createdOn + "    bigint\n "+
                 ");\n";
 
-        return new Query(createSensorTable + createMetadataTable);
+        return createSensorTable + createMetadataTable;
     }
 }

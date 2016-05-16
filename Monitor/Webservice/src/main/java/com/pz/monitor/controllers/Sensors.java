@@ -19,7 +19,7 @@ public class Sensors extends Base {
     @Produces(MediaType.APPLICATION_JSON)
     public Response host(@PathParam("id") String id) {
         try {
-            Query query = queryFactory.sensorQuery(id);
+            Query query = db.queryFactory().sensorQuery(id);
             ResultSet resultSet = db.execute(query);
             SensorDetailsResponse response = new SensorDetailsResponse(resultSet);
 

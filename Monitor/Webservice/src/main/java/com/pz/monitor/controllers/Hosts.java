@@ -17,7 +17,7 @@ public class Hosts extends Base {
     @Produces(MediaType.APPLICATION_JSON)
     public Response hosts() {
         try {
-            Query query = queryFactory.hostQuery();
+            Query query = db.queryFactory().hostQuery();
             ResultSet resultSet = db.execute(query);
             HostsResponse response = new HostsResponse(resultSet);
 
