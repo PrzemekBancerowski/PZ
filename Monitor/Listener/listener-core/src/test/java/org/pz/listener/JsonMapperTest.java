@@ -1,5 +1,7 @@
 package org.pz.listener;
 
+import org.pz.listener.core.DatabaseController;
+import org.pz.listener.core.Application;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.File;
 import java.io.IOException;
@@ -7,8 +9,8 @@ import java.io.InputStream;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.pz.listener.model.SensorDetails;
-import org.pz.listener.model.SensorMetadata;
+import org.pz.listener.core.model.SensorDetails;
+import org.pz.listener.core.model.SensorMetadata;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;

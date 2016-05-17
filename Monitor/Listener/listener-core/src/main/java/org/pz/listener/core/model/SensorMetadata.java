@@ -1,4 +1,4 @@
-package org.pz.listener.model;
+package org.pz.listener.core.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;

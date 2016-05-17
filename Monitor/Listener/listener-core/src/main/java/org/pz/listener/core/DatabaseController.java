@@ -1,14 +1,12 @@
-package org.pz.listener;
+package org.pz.listener.core;
 
-import org.pz.listener.dao.TestDao;
-import org.pz.listener.model.Test;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
-import org.pz.listener.dao.SensorDetailsDao;
-import org.pz.listener.dao.SensorMetadataDao;
-import org.pz.listener.model.SensorDetails;
-import org.pz.listener.model.SensorMetadata;
+import org.pz.listener.core.dao.SensorDetailsDao;
+import org.pz.listener.core.dao.SensorMetadataDao;
+import org.pz.listener.core.model.SensorDetails;
+import org.pz.listener.core.model.SensorMetadata;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
@@ -19,8 +17,6 @@ import org.springframework.stereotype.Controller;
 @Controller
 public class DatabaseController {
 
-//    @Autowired
-//    private TestDao testDao;
     @Autowired
     private SensorDetailsDao sensorDetailsDao;
     @Autowired

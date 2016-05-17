@@ -1,8 +1,7 @@
-package org.pz.listener.dao;
+package org.pz.listener.core.dao;
 
-import org.pz.listener.model.Test;
 import javax.transaction.Transactional;
-import org.pz.listener.model.SensorDetails;
+import org.pz.listener.core.model.SensorMetadata;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.CrudRepository;
@@ -12,9 +11,8 @@ import org.springframework.data.repository.CrudRepository;
  * @author Katarzyna Piotrowicz
  */
 @Transactional
-public interface SensorDetailsDao extends CrudRepository<SensorDetails, Integer> {
+public interface SensorMetadataDao extends CrudRepository<SensorMetadata, Integer> {
 
-    Page<SensorDetails> findAll(Pageable pageable);
-
-
+    Page<SensorMetadata> findAll(Pageable pageable);
+    
 }
