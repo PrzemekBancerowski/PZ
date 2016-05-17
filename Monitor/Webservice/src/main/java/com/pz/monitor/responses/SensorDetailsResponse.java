@@ -1,5 +1,7 @@
 package com.pz.monitor.responses;
 
+import com.pz.monitor.database.DatabaseTables.SENSOR_METADATA;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -19,18 +21,18 @@ public class SensorDetailsResponse {
 
     public SensorDetailsResponse(ResultSet resultSet) throws SQLException {
         if (resultSet.next()) {
-            this.SensorId = resultSet.getString("sensorId");
-            this.Name = resultSet.getString("name");
-            this.Vendor = resultSet.getString("vendor");
-            this.Version = resultSet.getString("version");
-            this.Architecture = resultSet.getString("architecture");
-            this.CpuModel = resultSet.getString("cpu_model");
-            this.CpuVendor = resultSet.getString("cpu_vendor");
-            this.CpuCores = resultSet.getString("cpu_cores");
-            this.CpuCache = resultSet.getString("cpu_cache");
-            this.Hostname = resultSet.getString("hostname");
-            this.Dns = resultSet.getString("dns");
-            this.CreatedOn = resultSet.getString("createdOn");
+            this.SensorId = resultSet.getString(SENSOR_METADATA.sensorId.toString());
+            this.Name = resultSet.getString(SENSOR_METADATA.name.toString());
+            this.Vendor = resultSet.getString(SENSOR_METADATA.vendor.toString());
+            this.Version = resultSet.getString(SENSOR_METADATA.version.toString());
+            this.Architecture = resultSet.getString(SENSOR_METADATA.architecture.toString());
+            this.CpuModel = resultSet.getString(SENSOR_METADATA.cpu_model.toString());
+            this.CpuVendor = resultSet.getString(SENSOR_METADATA.cpu_vendor.toString());
+            this.CpuCores = resultSet.getString(SENSOR_METADATA.cpu_cores.toString());
+            this.CpuCache = resultSet.getString(SENSOR_METADATA.cpu_cache.toString());
+            this.Hostname = resultSet.getString(SENSOR_METADATA.hostname.toString());
+            this.Dns = resultSet.getString(SENSOR_METADATA.dns.toString());
+            this.CreatedOn = resultSet.getString(SENSOR_METADATA.createdOn.toString());
         } else {
             throw new IllegalArgumentException("Invalid sensorId");
         }

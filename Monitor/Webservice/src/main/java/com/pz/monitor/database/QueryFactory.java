@@ -18,7 +18,7 @@ public class QueryFactory {
     }
 
     public Query hostQuery() throws SQLException {
-        String sqlQuery = " SELECT " + SENSOR_METADATA.sensorId + " as id, " + SENSOR_METADATA.hostname + " as host " +
+        String sqlQuery = " SELECT " + SENSOR_METADATA.sensorId + ", " + SENSOR_METADATA.hostname +
                           " FROM " + DatabaseTables.SENSOR_METADATA_TABLE+
                           " GROUP BY " + SENSOR_METADATA.sensorId + ", " + SENSOR_METADATA.hostname;
 
