@@ -1,16 +1,13 @@
 package com.project.pz.webserver.controller;
 
 import com.project.pz.webserver.entity.User;
-import com.project.pz.webserver.model.user.UserModel;
-import com.project.pz.webserver.model.user.UserRequest;
-import com.project.pz.webserver.model.user.UserResponse;
+import com.project.pz.webserver.model.request.UserRequest;
+import com.project.pz.webserver.model.response.UserResponse;
 import com.project.pz.webserver.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Optional;
 
 /**
  * Created by Piotr Sołtysiak on 2016-05-09.
