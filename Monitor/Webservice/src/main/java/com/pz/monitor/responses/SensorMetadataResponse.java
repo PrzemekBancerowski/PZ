@@ -5,7 +5,7 @@ import com.pz.monitor.database.DatabaseTables.SENSOR_METADATA;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class SensorDetailsResponse {
+public class SensorMetadataResponse {
     private final String SensorId;
     private final String Name;
     private final String Vendor;
@@ -19,7 +19,7 @@ public class SensorDetailsResponse {
     private final String Dns;
     private final String CreatedOn;
 
-    public SensorDetailsResponse(ResultSet resultSet) throws SQLException {
+    public SensorMetadataResponse(ResultSet resultSet) throws SQLException {
         if (resultSet.next()) {
             this.SensorId = resultSet.getString(SENSOR_METADATA.sensorId.toString());
             this.Name = resultSet.getString(SENSOR_METADATA.name.toString());

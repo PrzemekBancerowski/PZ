@@ -1,7 +1,7 @@
 package com.pz.monitor.controllers;
 
 import com.pz.monitor.database.Query;
-import com.pz.monitor.responses.SensorDetailsResponse;
+import com.pz.monitor.responses.SensorMetadataResponse;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -12,16 +12,16 @@ import javax.ws.rs.core.Response;
 import java.sql.ResultSet;
 
 @Path("/sensors")
-public class Sensors extends Base {
+public class SensorsMetadata extends Base {
 
     @GET
     @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response host(@PathParam("id") String id) {
         try {
-            Query query = db.queryFactory().sensorQuery(id);
+            Query query = db.queryFactory().sensorMetadataQuery(id);
             ResultSet resultSet = db.execute(query);
-            SensorDetailsResponse response = new SensorDetailsResponse(resultSet);
+            SensorMetadataResponse response = new SensorMetadataResponse(resultSet);
 
             String jsonResult = mapper.writeValueAsString(response);
             return Response.ok(jsonResult, MediaType.APPLICATION_JSON).build();

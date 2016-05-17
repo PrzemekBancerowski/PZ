@@ -26,7 +26,7 @@ public class QueryFactory {
         return new Query(statement);
     }
 
-    public Query sensorQuery(String id) throws SQLException {
+    public Query sensorMetadataQuery(String id) throws SQLException {
         String sqlQuery = " SELECT * FROM " + DatabaseTables.SENSOR_METADATA_TABLE +
                           " WHERE " + SENSOR_METADATA.sensorId + " = ?";
 
