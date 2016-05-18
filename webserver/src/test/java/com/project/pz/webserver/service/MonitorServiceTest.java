@@ -23,11 +23,14 @@ public class MonitorServiceTest extends AbstractTest {
     @Test
     public void getMonitorsTest() throws Exception {
         List<MonitorSimpleModel> monitorList = monitorService.getMonitors();
+        testMonitorList(monitorList);
+    }
 
+    public static void testMonitorList(List<MonitorSimpleModel> monitorList) {
         assertNotNull(monitorList);
         assertTrue(monitorList.size() > 0);
 
-        for (MonitorSimpleModel monitor :monitorList) {
+        for (MonitorSimpleModel monitor : monitorList) {
             assertNotNull(monitor.getId());
             assertNotNull(monitor.getAddress());
             assertNotNull(monitor.getName());
@@ -39,7 +42,10 @@ public class MonitorServiceTest extends AbstractTest {
     @Test
     public void getMonitorForIdTest() throws Exception {
         MonitorDetailModel monitor = monitorService.getMonitorForId(1);
+        testMonitorDetailModel(monitor);
+    }
 
+    public static void testMonitorDetailModel(MonitorDetailModel monitor) {
         assertNotNull(monitor);
         assertNotNull(monitor.getId());
         assertNotNull(monitor.getName());
@@ -53,7 +59,6 @@ public class MonitorServiceTest extends AbstractTest {
         assertFalse(hosts.isEmpty());
 
         HostServiceTest.checkHosts(hosts);
-
     }
 
     @Test
