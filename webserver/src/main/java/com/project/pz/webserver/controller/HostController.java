@@ -20,7 +20,7 @@ public class HostController {
     @Autowired
     private HostService hostService;
 
-    @RequestMapping(method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
+    @RequestMapping(path = "/", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
     @ResponseStatus(HttpStatus.OK)
     public HostResponse getForMonitorId(@RequestHeader String token, @RequestParam Integer monitorId) throws MonitorNotFoundException, MonitorNotUniqueException {
         // todo obsluzyc token

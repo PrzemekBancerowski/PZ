@@ -33,12 +33,12 @@ public class MeasurementController {
         return measurementService.getMeasurementsForUser(1);
     }
 
-//    @RequestMapping(method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
-//    @ResponseStatus(HttpStatus.OK)
-//    public MeasurementModel getMeasurementById(@RequestHeader String token, @RequestParam Integer measurementId) {
-//        // todo obsłużyć token
-//        return measurementService.getMeasurementById(1, measurementId);
-//    }
+    @RequestMapping(path = "/", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
+    @ResponseStatus(HttpStatus.OK)
+    public MeasurementModel getMeasurementById(@RequestHeader String token, @RequestParam Integer measurementId) {
+        // todo obsłużyć token
+        return measurementService.getMeasurementById(1, measurementId);
+    }
 
     @RequestMapping(method = RequestMethod.POST, produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
     @ResponseStatus(HttpStatus.CREATED)
@@ -63,7 +63,9 @@ public class MeasurementController {
 
     @RequestMapping(path = "/simple", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
     @ResponseStatus(HttpStatus.OK)
-    public SimpleSensorDetailsResponse getSimpleMeasurement(String SensorId, Measure Measurement, Integer MaxCount, Long StartTime, Long EndTime) throws MonitorNotFoundException, MonitorNotUniqueException {
+    public SimpleSensorDetailsResponse getSimpleMeasurement(@RequestHeader String token, @RequestParam String SensorId, @RequestParam Measure Measurement, @RequestParam Integer MaxCount,
+                                                            @RequestParam Long StartTime, @RequestParam Long EndTime) throws MonitorNotFoundException, MonitorNotUniqueException {
+        // todo obsluga tokena
         SimpleSensorDetailsRequest simpleSensorDetailsRequest = new SimpleSensorDetailsRequest(SensorId, Measurement, StartTime, EndTime, MaxCount);
         return measurementService.getSimpleMeasurement(simpleSensorDetailsRequest);
     }
