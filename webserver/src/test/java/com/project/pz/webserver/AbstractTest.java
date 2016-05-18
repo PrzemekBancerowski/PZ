@@ -12,5 +12,5 @@ import org.springframework.test.context.web.WebAppConfiguration;
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = App.class, initializers = ConfigFileApplicationContextInitializer.class)
 @WebAppConfiguration
-public class AbstractTest {
+public abstract class AbstractTest {
 }

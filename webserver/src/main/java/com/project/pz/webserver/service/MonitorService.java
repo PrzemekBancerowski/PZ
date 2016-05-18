@@ -2,7 +2,7 @@ package com.project.pz.webserver.service;
 
 import com.project.pz.webserver.exception.MonitorNotFoundException;
 import com.project.pz.webserver.exception.MonitorNotUniqueException;
-import com.project.pz.webserver.model.MonitorConfigModel;
+import com.project.pz.webserver.model.MonitorSimpleModel;
 import com.project.pz.webserver.model.MonitorDetailModel;
 
 import java.util.List;
@@ -13,7 +13,9 @@ import java.util.List;
  */
 public interface MonitorService {
 
-    List<MonitorConfigModel> getMonitors();
+    List<MonitorSimpleModel> getMonitors();
 
     MonitorDetailModel getMonitorForId(Integer monitorId) throws MonitorNotFoundException, MonitorNotUniqueException;
+
+    MonitorSimpleModel getMonitorForSensorId(String sensorId) throws MonitorNotFoundException, MonitorNotUniqueException;
 }

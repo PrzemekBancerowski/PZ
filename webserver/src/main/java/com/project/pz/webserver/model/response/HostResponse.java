@@ -7,11 +7,11 @@ import java.util.Map;
  * Created by Piotr Sołtysiak on 2016-05-17.
  * Contact: piotrek.soltysiak@gmail.com
  */
-public class HostsResponse {
+public class HostResponse {
 
     private Map<String, List<String>> hosts;
 
-    public HostsResponse() {
+    public HostResponse() {
     }
 
     public Map<String, List<String>> getHosts() {

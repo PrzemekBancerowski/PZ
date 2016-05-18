@@ -1,5 +1,7 @@
 package com.project.pz.webserver.service;
 
+import com.project.pz.webserver.exception.MonitorNotFoundException;
+import com.project.pz.webserver.exception.MonitorNotUniqueException;
 import com.project.pz.webserver.model.MeasurementModel;
 import com.project.pz.webserver.model.request.SimpleSensorDetailsRequest;
 import com.project.pz.webserver.model.response.ComplexSensorDetailsResponse;
@@ -23,7 +25,7 @@ public interface MeasurementService {
 
     MeasurementModel updateMeasurement(Integer userId, Integer measurementId, MeasurementModel measurement);
 
-    SimpleSensorDetailsResponse getSimpleMeasurement(SimpleSensorDetailsRequest request);
+    SimpleSensorDetailsResponse getSimpleMeasurement(SimpleSensorDetailsRequest request) throws MonitorNotFoundException, MonitorNotUniqueException;
 
     ComplexSensorDetailsResponse getComplexMeasurement(Integer measurementId);
 }

@@ -1,5 +1,8 @@
 package com.project.pz.webserver.controller;
 
+import com.project.pz.webserver.dict.Measure;
+import com.project.pz.webserver.exception.MonitorNotFoundException;
+import com.project.pz.webserver.exception.MonitorNotUniqueException;
 import com.project.pz.webserver.model.MeasurementModel;
 import com.project.pz.webserver.model.request.SimpleSensorDetailsRequest;
 import com.project.pz.webserver.model.response.ComplexSensorDetailsResponse;
@@ -60,7 +63,7 @@ public class MeasurementController {
 
     @RequestMapping(path = "/simple", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
     @ResponseStatus(HttpStatus.OK)
-    public SimpleSensorDetailsResponse getSimpleMeasurement(String SensorId, String Measurement, Integer MaxCount, Long StartTime, Long EndTime) {
+    public SimpleSensorDetailsResponse getSimpleMeasurement(String SensorId, Measure Measurement, Integer MaxCount, Long StartTime, Long EndTime) throws MonitorNotFoundException, MonitorNotUniqueException {
         SimpleSensorDetailsRequest simpleSensorDetailsRequest = new SimpleSensorDetailsRequest(SensorId, Measurement, StartTime, EndTime, MaxCount);
         return measurementService.getSimpleMeasurement(simpleSensorDetailsRequest);
     }

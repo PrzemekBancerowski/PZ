@@ -1,6 +1,7 @@
 package com.project.pz.webserver.model.request;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.project.pz.webserver.dict.Measure;
 
 /**
  * Created by Piotr Sołtysiak on 2016-05-17.
@@ -12,7 +13,7 @@ public class SimpleSensorDetailsRequest  {
     public final String sensorId;
 
     @JsonProperty("Measurement")
-    public final String measurement;
+    public final Measure measurement;
 
     @JsonProperty("StartTime")
     public final Long startTime;
@@ -23,7 +24,7 @@ public class SimpleSensorDetailsRequest  {
     @JsonProperty("MaxCount")
     public final Integer maxCount;
 
-    public SimpleSensorDetailsRequest(String sensorId, String measurement, Long startTime, Long endTime, Integer maxCount) {
+    public SimpleSensorDetailsRequest(String sensorId, Measure measurement, Long startTime, Long endTime, Integer maxCount) {
         this.sensorId = sensorId;
         this.measurement = measurement;
         this.startTime = startTime;
@@ -35,7 +36,7 @@ public class SimpleSensorDetailsRequest  {
         return sensorId;
     }
 
-    public String getMeasurement() {
+    public Measure getMeasurement() {
         return measurement;
     }
 

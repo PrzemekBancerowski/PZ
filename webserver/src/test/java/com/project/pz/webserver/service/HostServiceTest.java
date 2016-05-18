@@ -1,7 +1,7 @@
 package com.project.pz.webserver.service;
 
 import com.project.pz.webserver.AbstractTest;
-import com.project.pz.webserver.model.response.HostsResponse;
+import com.project.pz.webserver.model.response.HostResponse;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -23,7 +23,7 @@ public class HostServiceTest extends AbstractTest {
     @Test
     public void getHostsForIdTest() throws Exception {
         Integer monitorId = 1;
-        HostsResponse response = hostService.getHostsForMonitor(monitorId);
+        HostResponse response = hostService.getHostsForMonitor(monitorId);
 
         assertNotNull(response);
         assertNotNull(response.getHosts());

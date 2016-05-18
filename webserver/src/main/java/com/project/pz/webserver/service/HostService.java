@@ -2,7 +2,7 @@ package com.project.pz.webserver.service;
 
 import com.project.pz.webserver.exception.MonitorNotFoundException;
 import com.project.pz.webserver.exception.MonitorNotUniqueException;
-import com.project.pz.webserver.model.response.HostsResponse;
+import com.project.pz.webserver.model.response.HostResponse;
 
 /**
  * Created by Piotr Sołtysiak on 2016-05-17.
@@ -10,6 +10,8 @@ import com.project.pz.webserver.model.response.HostsResponse;
  */
 public interface HostService {
 
-    HostsResponse getHostsForMonitor(Integer monitorId) throws MonitorNotFoundException, MonitorNotUniqueException;
+    HostResponse getHostsForMonitor(Integer monitorId) throws MonitorNotFoundException, MonitorNotUniqueException;
+
+
 
 }

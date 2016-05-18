@@ -1,7 +1,7 @@
 package com.project.pz.webserver.service;
 
 import com.project.pz.webserver.AbstractTest;
-import com.project.pz.webserver.model.MonitorConfigModel;
+import com.project.pz.webserver.model.MonitorSimpleModel;
 import com.project.pz.webserver.model.MonitorDetailModel;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,12 +22,12 @@ public class MonitorServiceTest extends AbstractTest {
 
     @Test
     public void getMonitorsTest() throws Exception {
-        List<MonitorConfigModel> monitorList = monitorService.getMonitors();
+        List<MonitorSimpleModel> monitorList = monitorService.getMonitors();
 
         assertNotNull(monitorList);
         assertTrue(monitorList.size() > 0);
 
-        for (MonitorConfigModel monitor :monitorList) {
+        for (MonitorSimpleModel monitor :monitorList) {
             assertNotNull(monitor.getId());
             assertNotNull(monitor.getAddress());
             assertNotNull(monitor.getName());
@@ -54,6 +54,23 @@ public class MonitorServiceTest extends AbstractTest {
 
         HostServiceTest.checkHosts(hosts);
 
+    }
+
+    @Test
+    public void getMonitorForSensorId() throws Exception {
+        MonitorDetailModel monitor = monitorService.getMonitorForId(1);
+
+        MonitorSimpleModel monitorSimpleModel = new MonitorSimpleModel();
+        monitorSimpleModel.setId(monitor.getId());
+        monitorSimpleModel.setName(monitor.getName());
+        monitorSimpleModel.setAddress(monitor.getAddress());
+
+        String sensorId = monitor.getHosts().entrySet().iterator().next().getValue().get(1);
+
+        MonitorSimpleModel foundMonitorSimpleModel = monitorService.getMonitorForSensorId(sensorId);
+
+        assertNotNull(foundMonitorSimpleModel);
+        assertEquals(monitorSimpleModel, foundMonitorSimpleModel);
     }
 
 }

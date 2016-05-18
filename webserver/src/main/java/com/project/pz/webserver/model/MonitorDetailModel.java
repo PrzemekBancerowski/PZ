@@ -51,4 +51,6 @@ public class MonitorDetailModel {
     public void setHosts(Map<String, List<String>> hosts) {
         this.hosts = hosts;
     }
+
+
 }
