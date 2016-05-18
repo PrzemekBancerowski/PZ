@@ -3,11 +3,11 @@ monitor-configuration:
   -
     id: 1
     name: "monitor1"
-    address: "https://aaa.cc"
+    address: "https://boiling-refuge-92080.herokuapp.com"
   -
     id: 2
     name: "monitor2"
-    address: "https://aaa.bb"
+    address: "https://aaaa.bb"
 
 spring:
   jpa:

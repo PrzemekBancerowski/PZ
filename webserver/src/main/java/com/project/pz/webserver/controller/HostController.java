@@ -1,5 +1,7 @@
 package com.project.pz.webserver.controller;
 
+import com.project.pz.webserver.exception.MonitorNotFoundException;
+import com.project.pz.webserver.exception.MonitorNotUniqueException;
 import com.project.pz.webserver.model.response.HostsResponse;
 import com.project.pz.webserver.service.HostService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,8 +25,8 @@ public class HostController {
 
     @RequestMapping(method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
     @ResponseStatus(HttpStatus.OK)
-    public HostsResponse get() {
-        return hostService.getHosts();
+    public HostsResponse get() throws MonitorNotFoundException, MonitorNotUniqueException {
+        return hostService.getHosts(1);
     }
 
 }
