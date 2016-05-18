@@ -30,12 +30,12 @@ public class MeasurementController {
         return measurementService.getMeasurementsForUser(1);
     }
 
-    @RequestMapping(method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
-    @ResponseStatus(HttpStatus.OK)
-    public MeasurementModel getMeasurementById(@RequestHeader String token, @RequestParam Integer measurementId) {
-        // todo obsłużyć token
-        return measurementService.getMeasurementById(1, measurementId);
-    }
+//    @RequestMapping(method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
+//    @ResponseStatus(HttpStatus.OK)
+//    public MeasurementModel getMeasurementById(@RequestHeader String token, @RequestParam Integer measurementId) {
+//        // todo obsłużyć token
+//        return measurementService.getMeasurementById(1, measurementId);
+//    }
 
     @RequestMapping(method = RequestMethod.POST, produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
     @ResponseStatus(HttpStatus.CREATED)

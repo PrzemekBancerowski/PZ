@@ -20,6 +20,6 @@ public class MonitorServiceDefaultImpl implements MonitorService {
 
     @Override
     public List<MonitorConfigModel> getMonitors() {
-        return monitorListConfig.getMonitorConfigList();
+        return monitorListConfig.getMonitorList();
     }
 }

@@ -10,17 +10,17 @@ import java.util.List;
  * Created by Piotr Sołtysiak on 2016-05-18.
  * Contact: piotrek.soltysiak@gmail.com
  */
-@ConfigurationProperties(prefix = "monitor-list")
+@ConfigurationProperties(prefix = "monitor-configuration")
 @Configuration
 public class MonitorListConfig {
 
-    private List<MonitorConfigModel> monitorConfigList;
+    private List<MonitorConfigModel> monitorList;
 
-    public List<MonitorConfigModel> getMonitorConfigList() {
-        return monitorConfigList;
+    public List<MonitorConfigModel> getMonitorList() {
+        return monitorList;
     }
 
-    public void setMonitorConfigList(List<MonitorConfigModel> monitorConfigList) {
-        this.monitorConfigList = monitorConfigList;
+    public void setMonitorList(List<MonitorConfigModel> monitorConfigList) {
+        this.monitorList = monitorConfigList;
     }
 }

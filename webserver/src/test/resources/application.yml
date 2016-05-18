@@ -2,8 +2,12 @@ monitor-configuration:
   monitorList:
   -
     id: 1
-    name: monitor1
-    address: https://boiling-refuge-92080.herokuapp.com
+    name: "monitor1"
+    address: "https://aaa.cc"
+  -
+    id: 2
+    name: "monitor2"
+    address: "https://aaa.bb"
 
 spring:
   jpa:
@@ -16,6 +20,3 @@ spring:
     username: postgres
     password: 1qaz@WSX
     driverClassName: org.postgresql.Driver
-
-server:
-     port: 7755
