@@ -23,7 +23,7 @@ public class HostServiceTest extends AbstractTest {
     @Test
     public void getHostsForIdTest() throws Exception {
         Integer monitorId = 1;
-        HostsResponse response = hostService.getHosts(monitorId);
+        HostsResponse response = hostService.getHostsForMonitor(monitorId);
 
         assertNotNull(response);
         assertNotNull(response.getHosts());

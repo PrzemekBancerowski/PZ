@@ -10,5 +10,6 @@ import com.project.pz.webserver.model.response.HostsResponse;
  */
 public interface HostService {
 
-    HostsResponse getHosts(Integer monitorId) throws MonitorNotFoundException, MonitorNotUniqueException;
+    HostsResponse getHostsForMonitor(Integer monitorId) throws MonitorNotFoundException, MonitorNotUniqueException;
+
 }

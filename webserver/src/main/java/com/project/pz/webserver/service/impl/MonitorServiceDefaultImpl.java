@@ -33,7 +33,7 @@ public class MonitorServiceDefaultImpl implements MonitorService {
 
     @Override
     public MonitorDetailModel getMonitorForId(Integer monitorId) throws MonitorNotFoundException, MonitorNotUniqueException {
-        HostsResponse response = hostService.getHosts(monitorId);
+        HostsResponse response = hostService.getHostsForMonitor(monitorId);
         MonitorConfigModel monitorConfigModel = monitorListConfig.getMonitorById(monitorId);
 
         MonitorDetailModel monitorDetailModel = new MonitorDetailModel();

@@ -3,7 +3,6 @@ package com.project.pz.webserver.service.impl;
 import com.project.pz.webserver.config.MonitorListConfig;
 import com.project.pz.webserver.exception.MonitorNotFoundException;
 import com.project.pz.webserver.exception.MonitorNotUniqueException;
-import com.project.pz.webserver.model.MonitorConfigModel;
 import com.project.pz.webserver.model.response.HostsResponse;
 import com.project.pz.webserver.service.HostService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +20,7 @@ public class HostServiceDefaultImpl implements HostService {
     private MonitorListConfig monitorListConfig;
 
     @Override
-    public HostsResponse getHosts(Integer monitorId) throws MonitorNotFoundException, MonitorNotUniqueException {
+    public HostsResponse getHostsForMonitor(Integer monitorId) throws MonitorNotFoundException, MonitorNotUniqueException {
         String address = monitorListConfig.getMonitorById(monitorId).getAddress();
 
         RestTemplate restTemplate = new RestTemplate();
