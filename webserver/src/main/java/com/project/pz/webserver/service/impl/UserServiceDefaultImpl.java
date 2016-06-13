@@ -1,14 +1,11 @@
 package com.project.pz.webserver.service.impl;
 
-import com.project.pz.webserver.dict.Role;
 import com.project.pz.webserver.entity.User;
+import com.project.pz.webserver.model.UserModel;
 import com.project.pz.webserver.repository.UserRepository;
 import com.project.pz.webserver.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import java.util.Optional;
 
 /**
  * Created by Piotr Sołtysiak on 2016-05-06.
@@ -21,22 +18,18 @@ public class UserServiceDefaultImpl implements UserService {
     private UserRepository userRepository;
 
     @Override
-    public User create(String email, String password) {
-        User user = new User();
-        user.setEmail(email);
-        user.setPasswordHash(new BCryptPasswordEncoder().encode(password));
-        user.setRole(Role.USER);
-
-        return userRepository.save(user);
+    public UserModel create(UserModel model) {
+        User savedUser = userRepository.save(new User(model));
+        return new UserModel(savedUser);
     }
 
     @Override
-    public Optional<User> getUserById(Integer id) {
-        return Optional.ofNullable(userRepository.findOne(id));
+    public User getUserById(Integer id) {
+        return userRepository.findOne(id);
     }
 
     @Override
-    public Optional<User> getUserByEmail(String email) {
-        return userRepository.findOneByEmail(email);
+    public User getUserByEmail(String email) {
+        return userRepository.findOneByEmail(email).get();
     }
 }

@@ -1,8 +1,7 @@
 package com.project.pz.webserver.service;
 
 import com.project.pz.webserver.entity.User;
-
-import java.util.Optional;
+import com.project.pz.webserver.model.UserModel;
 
 /**
  * Created by Piotr Sołtysiak on 2016-05-06.
@@ -10,10 +9,10 @@ import java.util.Optional;
  */
 public interface UserService {
 
-    User create(String email, String password);
+    UserModel create(UserModel model);
 
-    Optional<User> getUserById(Integer id);
+    User getUserById(Integer id);
 
-    Optional<User> getUserByEmail(String email);
+    User getUserByEmail(String email);
 
 }

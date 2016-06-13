@@ -1,6 +1,7 @@
 package com.project.pz.webserver.entity;
 
-import com.project.pz.webserver.dict.Role;
+import com.project.pz.webserver.model.UserModel;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.persistence.*;
 
@@ -9,24 +10,28 @@ import javax.persistence.*;
  * Contact: piotrek.soltysiak@gmail.com
  */
 @Entity
-@Table(name = "users")
+@Table(name = "users", schema = "main")
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @SequenceGenerator(name="users_seq_gen", sequenceName="main.users_seq", allocationSize=1, schema = "main")
+    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="users_seq_gen")
     @Column(name = "id", nullable = false, updatable = false, unique = true)
     private Integer id;
 
-    @Column(name="email", nullable = false, unique = true)
+    @Column(name = "email", nullable = false, unique = true)
     private String email;
 
-    @Column(name="password_hash", nullable = false)
+    @Column(name = "password_hash", nullable = false)
     private String passwordHash;
 
-    @Column(name = "role", nullable = false)
-    private Role role;
-
     public User() {
+    }
+
+    public User(UserModel model) {
+        this.id = model.getId();
+        this.email = model.getEmail();
+        this.passwordHash = new BCryptPasswordEncoder().encode(model.getPassword());
     }
 
     public Integer getId() {
@@ -53,11 +58,4 @@ public class User {
         this.passwordHash = passwordHash;
     }
 
-    public Role getRole() {
-        return role;
-    }
-
-    public void setRole(Role role) {
-        this.role = role;
-    }
 }

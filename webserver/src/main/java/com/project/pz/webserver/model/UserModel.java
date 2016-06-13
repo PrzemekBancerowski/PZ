@@ -1,5 +1,7 @@
 package com.project.pz.webserver.model;
 
+import com.project.pz.webserver.entity.User;
+
 /**
  * Created by Piotr Sołtysiak on 2016-05-09.
  * Contact: piotrek.soltysiak@gmail.com
@@ -13,6 +15,11 @@ public class UserModel {
     private String password;
 
     public UserModel() {
+    }
+
+    public UserModel(User user) {
+        this.id = user.getId();
+        this.email = user.getEmail();
     }
 
     public Integer getId() {
