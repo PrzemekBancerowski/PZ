@@ -5,6 +5,8 @@ import com.project.pz.webserver.model.UserModel;
 import com.project.pz.webserver.repository.UserRepository;
 import com.project.pz.webserver.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 /**
@@ -13,6 +15,8 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class UserServiceDefaultImpl implements UserService {
+
+    private final String ANONYMOUS_USER = "anonymousUser";
 
     @Autowired
     private UserRepository userRepository;
@@ -31,5 +35,18 @@ public class UserServiceDefaultImpl implements UserService {
     @Override
     public User getUserByEmail(String email) {
         return userRepository.findOneByEmail(email).get();
+    }
+
+    public UserModel getLoggedUser() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (ANONYMOUS_USER.equals(auth.getPrincipal().toString())) {
+            return null;
+        } else {
+            org.springframework.security.core.userdetails.User user = (org.springframework.security.core.userdetails.User) auth.getPrincipal();
+            if (user != null) {
+                return new UserModel(getUserByEmail(user.getUsername()));
+            }
+            return null;
+        }
     }
 }

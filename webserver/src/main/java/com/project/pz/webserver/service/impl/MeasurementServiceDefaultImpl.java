@@ -21,7 +21,6 @@ public class MeasurementServiceDefaultImpl implements MeasurementService {
     @Autowired
     private MonitorService monitorService;
 
-
     @Override
     public List<BigDecimal> getMeasurements(String monitorId, String sensorId, String metricId, LocalDateTime fromDate, LocalDateTime toDate) {
         return mockMeasurements();
