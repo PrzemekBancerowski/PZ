@@ -39,43 +39,4 @@ public class MonitorServiceTest extends AbstractTest {
         }
     }
 
-    @Test
-    public void getMonitorForIdTest() throws Exception {
-        MonitorDetailModel monitor = monitorService.getMonitorForId(1);
-        testMonitorDetailModel(monitor);
-    }
-
-    public static void testMonitorDetailModel(MonitorDetailModel monitor) {
-        assertNotNull(monitor);
-        assertNotNull(monitor.getId());
-        assertNotNull(monitor.getName());
-        assertFalse(monitor.getName().isEmpty());
-        assertNotNull(monitor.getAddress());
-        assertFalse(monitor.getAddress().isEmpty());
-
-        Map<String, List<String>> hosts = monitor.getHosts();
-
-        assertNotNull(hosts);
-        assertFalse(hosts.isEmpty());
-
-        HostServiceTest.checkHosts(hosts);
-    }
-
-    @Test
-    public void getMonitorForSensorId() throws Exception {
-        MonitorDetailModel monitor = monitorService.getMonitorForId(1);
-
-        MonitorSimpleModel monitorSimpleModel = new MonitorSimpleModel();
-        monitorSimpleModel.setId(monitor.getId());
-        monitorSimpleModel.setName(monitor.getName());
-        monitorSimpleModel.setAddress(monitor.getAddress());
-
-        String sensorId = monitor.getHosts().entrySet().iterator().next().getValue().get(1);
-
-        MonitorSimpleModel foundMonitorSimpleModel = monitorService.getMonitorForSensorId(sensorId);
-
-        assertNotNull(foundMonitorSimpleModel);
-        assertEquals(monitorSimpleModel, foundMonitorSimpleModel);
-    }
-
 }

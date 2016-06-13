@@ -47,7 +47,5 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and().csrf().disable().exceptionHandling().authenticationEntryPoint(authenticationEntryPoint)
                 .and().formLogin().successHandler(authenticationSuccessHandler)
                 .and().formLogin().failureHandler(authenticationFailureHandler);
-
-
     }
 }

@@ -52,19 +52,6 @@ public class MonitorControllerTest extends AbstractMvcTest {
         MonitorServiceTest.testMonitorList(monitorList);
     }
 
-    @Test
-    public void getMonitorForIdTest() throws Exception {
-        MvcResult result = mockMvc.perform(get("/monitors/").param("monitorId", "1"))
-                .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
-                .andDo(print())
-                .andExpect(content().encoding(EXPECTED_ENCODING))
-                .andReturn();
-
-        MonitorDetailModel monitorDetailModel = mapper.readValue(result.getResponse().getContentAsString(), MonitorDetailModel.class);
-        MonitorServiceTest.testMonitorDetailModel(monitorDetailModel);
-    }
-
 
     @Override
     protected Object[] getInjectedControllers() {
