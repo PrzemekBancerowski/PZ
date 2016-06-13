@@ -7,13 +7,11 @@ import com.project.pz.webserver.dict.MetricType;
 import com.project.pz.webserver.model.MetricModel;
 import com.project.pz.webserver.model.MonitorSimpleModel;
 import com.project.pz.webserver.model.SensorModel;
-import com.project.pz.webserver.model.response.SimpleSensorDetailsResponse;
 import com.project.pz.webserver.service.MeasurementService;
 import com.project.pz.webserver.service.MetricService;
 import com.project.pz.webserver.service.MonitorService;
 import com.project.pz.webserver.service.SensorService;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -134,31 +132,6 @@ public class MeasurementControllerTest extends AbstractMvcTest {
 
         assertNotNull(measureList);
         assertFalse(measureList.isEmpty());
-
-    }
-
-    //SensorId=sensor6&Measurement=CPU&MaxCount=100&StartTime=0&EndTime=100000000000
-    @Ignore
-    @Test
-    public void getSimpleMeasurementTest() throws Exception {
-        MvcResult result = mockMvc.perform(get("/measurements/simple")
-                .param("SensorId", "sensor6")
-                .param("Measurement", Measure.CPU.name())
-                .param("MaxCount", "100")
-                .param("StartTime", "0")
-                .param("EndTime", "100000000000")
-                .header("token", "aaa"))
-                .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
-                .andDo(print())
-                .andExpect(content().encoding(EXPECTED_ENCODING))
-                .andReturn();
-
-        SimpleSensorDetailsResponse response = mapper.readValue(result.getResponse().getContentAsString(), SimpleSensorDetailsResponse.class);
-
-        assertNotNull(response);
-        assertNotNull(response.getValues());
-        assertFalse(response.getValues().isEmpty());
 
     }
 
