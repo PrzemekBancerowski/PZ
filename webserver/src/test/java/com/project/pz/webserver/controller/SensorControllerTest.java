@@ -2,7 +2,7 @@ package com.project.pz.webserver.controller;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.project.pz.webserver.AbstractMvcTest;
-import com.project.pz.webserver.model.MonitorSimpleModel;
+import com.project.pz.webserver.model.MonitorModel;
 import com.project.pz.webserver.model.SensorModel;
 import com.project.pz.webserver.service.MonitorService;
 import com.project.pz.webserver.service.SensorService;
@@ -55,10 +55,10 @@ public class SensorControllerTest extends AbstractMvcTest {
                 .andExpect(content().encoding(EXPECTED_ENCODING))
                 .andReturn();
 
-        List<MonitorSimpleModel> monitorList = mapper.readValue(getMonitorsResult.getResponse().getContentAsString(), new TypeReference<List<MonitorSimpleModel>>() {
+        List<MonitorModel> monitorList = mapper.readValue(getMonitorsResult.getResponse().getContentAsString(), new TypeReference<List<MonitorModel>>() {
         });
 
-        for (MonitorSimpleModel monitor : monitorList) {
+        for (MonitorModel monitor : monitorList) {
             MvcResult getSensorsResult = mockMvc.perform(get("/monitors/" + monitor.getId() + "/sensors"))
                     .andExpect(status().isOk())
                     .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))

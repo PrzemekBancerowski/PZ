@@ -4,7 +4,7 @@ package com.project.pz.webserver.model;
  * Created by Piotr Sołtysiak on 2016-05-18.
  * Contact: piotrek.soltysiak@gmail.com
  */
-public class MonitorSimpleModel {
+public class MonitorModel {
 
     private String id;
 
@@ -12,7 +12,7 @@ public class MonitorSimpleModel {
 
     private String address;
 
-    public MonitorSimpleModel() {
+    public MonitorModel() {
     }
 
     public String getId() {
@@ -44,7 +44,7 @@ public class MonitorSimpleModel {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        MonitorSimpleModel that = (MonitorSimpleModel) o;
+        MonitorModel that = (MonitorModel) o;
 
         if (getId() != null ? !getId().equals(that.getId()) : that.getId() != null) return false;
         if (getName() != null ? !getName().equals(that.getName()) : that.getName() != null) return false;

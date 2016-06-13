@@ -1,6 +1,6 @@
 package com.project.pz.webserver.controller;
 
-import com.project.pz.webserver.model.MonitorSimpleModel;
+import com.project.pz.webserver.model.MonitorModel;
 import com.project.pz.webserver.service.MonitorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -25,7 +25,7 @@ public class MonitorController {
 
     @RequestMapping(method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
     @ResponseStatus(HttpStatus.OK)
-    public List<MonitorSimpleModel> getMonitors() {
+    public List<MonitorModel> getMonitors() {
         return monitorService.getMonitors();
     }
 

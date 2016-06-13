@@ -2,7 +2,7 @@ package com.project.pz.webserver.repository;
 
 import com.project.pz.webserver.exception.MonitorNotFoundException;
 import com.project.pz.webserver.exception.MonitorNotUniqueException;
-import com.project.pz.webserver.model.MonitorSimpleModel;
+import com.project.pz.webserver.model.MonitorModel;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
@@ -17,18 +17,18 @@ import java.util.Objects;
 @Configuration
 public class MonitorRepository {
 
-    private List<MonitorSimpleModel> monitorList;
+    private List<MonitorModel> monitorList;
 
-    public List<MonitorSimpleModel> getMonitorList() {
+    public List<MonitorModel> getMonitorList() {
         return monitorList;
     }
 
-    public void setMonitorList(List<MonitorSimpleModel> monitorConfigList) {
+    public void setMonitorList(List<MonitorModel> monitorConfigList) {
         this.monitorList = monitorConfigList;
     }
 
-    public MonitorSimpleModel getMonitorById(Integer monitorId) throws MonitorNotFoundException, MonitorNotUniqueException {
-        final MonitorSimpleModel[] monitorArray = {null};
+    public MonitorModel getMonitorById(Integer monitorId) throws MonitorNotFoundException, MonitorNotUniqueException {
+        final MonitorModel[] monitorArray = {null};
         monitorList.stream()
                 .filter(monitor -> Objects.equals(monitor.getId(), monitorId))
                 .findFirst()

@@ -1,6 +1,6 @@
 package com.project.pz.webserver.service;
 
-import com.project.pz.webserver.model.MonitorSimpleModel;
+import com.project.pz.webserver.model.MonitorModel;
 
 import java.util.List;
 
@@ -10,6 +10,6 @@ import java.util.List;
  */
 public interface MonitorService {
 
-    List<MonitorSimpleModel> getMonitors();
+    List<MonitorModel> getMonitors();
 
 }

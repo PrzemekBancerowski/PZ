@@ -1,13 +1,11 @@
 package com.project.pz.webserver.service;
 
 import com.project.pz.webserver.AbstractTest;
-import com.project.pz.webserver.model.MonitorSimpleModel;
-import com.project.pz.webserver.model.MonitorDetailModel;
+import com.project.pz.webserver.model.MonitorModel;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
-import java.util.Map;
 
 import static org.junit.Assert.*;
 
@@ -22,15 +20,15 @@ public class MonitorServiceTest extends AbstractTest {
 
     @Test
     public void getMonitorsTest() throws Exception {
-        List<MonitorSimpleModel> monitorList = monitorService.getMonitors();
+        List<MonitorModel> monitorList = monitorService.getMonitors();
         testMonitorList(monitorList);
     }
 
-    public static void testMonitorList(List<MonitorSimpleModel> monitorList) {
+    public static void testMonitorList(List<MonitorModel> monitorList) {
         assertNotNull(monitorList);
         assertTrue(monitorList.size() > 0);
 
-        for (MonitorSimpleModel monitor : monitorList) {
+        for (MonitorModel monitor : monitorList) {
             assertNotNull(monitor.getId());
             assertNotNull(monitor.getAddress());
             assertNotNull(monitor.getName());

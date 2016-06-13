@@ -5,12 +5,10 @@ import com.project.pz.webserver.AbstractMvcTest;
 import com.project.pz.webserver.dict.Measure;
 import com.project.pz.webserver.dict.MetricType;
 import com.project.pz.webserver.model.MetricModel;
-import com.project.pz.webserver.model.MonitorSimpleModel;
+import com.project.pz.webserver.model.MonitorModel;
 import com.project.pz.webserver.model.SensorModel;
-import com.project.pz.webserver.service.MeasurementService;
-import com.project.pz.webserver.service.MetricService;
-import com.project.pz.webserver.service.MonitorService;
-import com.project.pz.webserver.service.SensorService;
+import com.project.pz.webserver.model.UserModel;
+import com.project.pz.webserver.service.*;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
@@ -18,12 +16,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.test.util.ReflectionTestUtils;
 import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.util.List;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestBuilders.formLogin;
+import static org.springframework.security.test.web.servlet.response.SecurityMockMvcResultMatchers.authenticated;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -34,6 +35,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * Created by Piotr Sołtysiak on 2016-05-18.
  * Contact: piotrek.soltysiak@gmail.com
  */
+@Transactional
 public class MeasurementControllerTest extends AbstractMvcTest {
 
     @InjectMocks
@@ -48,6 +50,9 @@ public class MeasurementControllerTest extends AbstractMvcTest {
     @InjectMocks
     protected MetricsController metricsController;
 
+    @InjectMocks
+    private UserController userController;
+
     @Autowired
     private MeasurementService measurementService;
 
@@ -60,12 +65,18 @@ public class MeasurementControllerTest extends AbstractMvcTest {
     @Autowired
     private MetricService metricService;
 
+    @Autowired
+    private UserService userService;
+
     @Before
-    public void init() {
+    public void init() throws Exception {
         ReflectionTestUtils.setField(measurementController, "measurementService", measurementService);
         ReflectionTestUtils.setField(monitorController, "monitorService", monitorService);
         ReflectionTestUtils.setField(sensorController, "sensorService", sensorService);
         ReflectionTestUtils.setField(metricsController, "metricService", metricService);
+        ReflectionTestUtils.setField(userController, "userService", userService);
+
+        authorize();
     }
 
     @Test
@@ -80,10 +91,10 @@ public class MeasurementControllerTest extends AbstractMvcTest {
                 .andExpect(content().encoding(EXPECTED_ENCODING))
                 .andReturn();
 
-        List<MonitorSimpleModel> monitorList = mapper.readValue(getMonitorsResult.getResponse().getContentAsString(), new TypeReference<List<MonitorSimpleModel>>() {
+        List<MonitorModel> monitorList = mapper.readValue(getMonitorsResult.getResponse().getContentAsString(), new TypeReference<List<MonitorModel>>() {
         });
 
-        for (MonitorSimpleModel monitor : monitorList) {
+        for (MonitorModel monitor : monitorList) {
             MvcResult getSensorsResult = mockMvc.perform(get("/monitors/" + monitor.getId() + "/sensors"))
                     .andExpect(status().isOk())
                     .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
@@ -120,7 +131,7 @@ public class MeasurementControllerTest extends AbstractMvcTest {
 
         MetricModel addedMetric = mapper.readValue(addMetricResult.getResponse().getContentAsString(), MetricModel.class);
 
-        MvcResult getMeasurementResult = mockMvc.perform(get("/monitors/" + monitorId + "/sensors/" + sensorId + "/metrics/" + addedMetric.getId()+ "/measurements"))
+        MvcResult getMeasurementResult = mockMvc.perform(get("/monitors/" + monitorId + "/sensors/" + sensorId + "/metrics/" + addedMetric.getId() + "/measurements"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andDo(print())
@@ -135,8 +146,26 @@ public class MeasurementControllerTest extends AbstractMvcTest {
 
     }
 
+    private void authorize() throws Exception {
+        UserModel userModel = new UserModel();
+        userModel.setEmail("email@email.co");
+        userModel.setPassword("password12345");
+
+        mockMvc.perform(post("/users/create")
+                .content(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(userModel))
+                .contentType(MediaType.APPLICATION_JSON_UTF8))
+                .andExpect(status().isCreated())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
+                .andExpect(content().encoding(EXPECTED_ENCODING))
+                .andDo(print())
+                .andReturn();
+
+        mockMvc.perform(formLogin("/users/login").user("email", userModel.getEmail()).password(userModel.getPassword()))
+                .andExpect(authenticated().withRoles("USER"));
+    }
+
     @Override
     protected Object[] getInjectedControllers() {
-        return new Object[]{measurementController, monitorController, sensorController, metricsController};
+        return new Object[]{measurementController, monitorController, sensorController, metricsController, userController};
     }
 }

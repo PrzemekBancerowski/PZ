@@ -39,7 +39,7 @@ public class MeasurementServiceDefaultImpl implements MeasurementService {
 //    public SimpleSensorDetailsResponse getSimpleMeasurement(SimpleSensorDetailsRequest request) throws MonitorNotFoundException, MonitorNotUniqueException {
 //
 //        RestTemplate restTemplate = new RestTemplate();
-//        MonitorSimpleModel monitor = new MonitorSimpleModel(); // TODO
+//        MonitorModel monitor = new MonitorModel(); // TODO
 //
 //        HttpHeaders headers = new HttpHeaders();
 //        headers.set("Accept", MediaType.ALL_VALUE);

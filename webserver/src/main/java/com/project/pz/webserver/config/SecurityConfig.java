@@ -46,7 +46,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and().csrf().disable().exceptionHandling().authenticationEntryPoint(authenticationEntryPoint)
                 .and().formLogin().loginProcessingUrl("/users/login").usernameParameter("email").permitAll()
                 .and().logout().logoutUrl("/users/logout").logoutSuccessUrl("/").permitAll()
-                .and().authorizeRequests().antMatchers("/users/**").permitAll().antMatchers("/**").authenticated()
+                .and().authorizeRequests().antMatchers("/users/**").permitAll()//.antMatchers("/**").authenticated()
                 .and().formLogin().successHandler(authenticationSuccessHandler)
                 .and().formLogin().failureHandler(authenticationFailureHandler);
     }
