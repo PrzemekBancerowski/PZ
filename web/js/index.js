@@ -14,7 +14,7 @@ $(document).ready(function(){
 });
 
 function enableButton() {
-	$('#chooseMonitor').attr("disabled", false);
+	$('#chooseMonitorButton').attr("disabled", false);
 }
 
 function chooseMonitor(){
