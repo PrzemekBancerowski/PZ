@@ -56,3 +56,16 @@ body {
     padding-top: 15px;
 }
 
+#hostsData{
+    display:none;
+}
+#daneSensora{
+    display:none;
+}
+#metryki{
+    display:none;
+}
+#daneMetryki{
+    display:none;
+}
+
