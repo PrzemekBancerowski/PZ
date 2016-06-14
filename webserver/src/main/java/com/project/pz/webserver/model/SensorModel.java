@@ -110,4 +110,20 @@ public class SensorModel {
     public void setSystemVersion(String systemVersion) {
         this.systemVersion = systemVersion;
     }
+
+    @Override
+    public String toString() {
+        return "SensorModel{" +
+                "id='" + id + '\'' +
+                ", hostName='" + hostName + '\'' +
+                ", cpu='" + cpu + '\'' +
+                ", cpuVendor='" + cpuVendor + '\'' +
+                ", cpuCoreCount=" + cpuCoreCount +
+                ", memorySize=" + memorySize +
+                ", systemName='" + systemName + '\'' +
+                ", systemArch='" + systemArch + '\'' +
+                ", systemVendor='" + systemVendor + '\'' +
+                ", systemVersion='" + systemVersion + '\'' +
+                '}';
+    }
 }

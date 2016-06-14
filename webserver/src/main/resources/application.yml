@@ -17,5 +17,10 @@ spring:
     password: 1qaz@WSX
     driverClassName: org.postgresql.Driver
 
+logging:
+  level:
+    org.springframework: INFO
+    security: DEBUG
+
 server:
      port: 7755
