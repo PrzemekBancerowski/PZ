@@ -1,3 +1,5 @@
+
+var tableSensors = [];
 $(document).ready(function(){
 	$.ajax({
 		type: "GET",
@@ -20,5 +22,89 @@ function enableButton() {
 function chooseMonitor(){
 	id = $('#wybierzMonitor').val();
 	
+	if(id != null)
+		getListSensors();
 
 }
+
+
+function getListSensors(){
+    var selectedMonitor = $('#wybierzMonitor').val();
+       $.ajax({
+
+    url: 'http://localhost:7755//monitors/' + selectedMonitor + '/sensors',
+    type: "GET",
+    dataType: "json",
+    async:false,
+     success: function (msg) {
+         tableSensors = msg;
+         addSensorsToList(msg);
+    },
+    error: function () {
+        ErrorFunction();
+    }
+
+    });
+}
+
+
+function getMetrics(sensorId){
+    var tableMetrics = [];
+    var selectedMonitor = $('#wybierzMonitor').val();
+       $.ajax({
+
+    url: 'http://localhost:7755//monitors/' + selectedMonitor + '/sensors/' + sensorId + '/metrics',
+    type: "GET",
+    dataType: "json",
+    async:false,
+     success: function (msg) {
+         tableMetrics = msg;
+    },
+    error: function () {
+        ErrorFunction();
+    }
+
+    });
+}
+
+
+
+function addSensorsToList(listOfSensors){
+
+    var select = document.getElementById("sel2");
+
+    for(sensor in listOfSensors) {
+        select.options[select.options.length] = new Option(listOfSensors[sensor].hostName, sensor);
+    }
+
+}
+
+function displayTextAboutSensor(id){
+
+	$("#daneSensora").append( "<p>Test</p>" );
+
+}
+
+function changeFunc() {
+
+	$("#daneSensora").html("");
+	var obj = document.getElementById("sel2");
+	var sensorId = obj.options[obj.selectedIndex].value;
+
+
+	$("#daneSensora").append( "<p> id: " + tableSensors[sensorId].id + "</p>" );
+	$("#daneSensora").append( "<p> hostName: " + tableSensors[sensorId].hostName + "</p>" );
+	$("#daneSensora").append( "<p> cpu: " + tableSensors[sensorId].cpu + "</p>" );
+	$("#daneSensora").append( "<p> cpuVendor: " + tableSensors[sensorId].cpuVendor + "</p>" );
+	$("#daneSensora").append( "<p> cpuCoreCount: " + tableSensors[sensorId].cpuCoreCount + "</p>" );
+	$("#daneSensora").append( "<p> memorySize: " + tableSensors[sensorId].memorySize + "</p>" );
+	$("#daneSensora").append( "<p> systemName: " + tableSensors[sensorId].systemName + "</p>" );
+	$("#daneSensora").append( "<p> systemArch: " + tableSensors[sensorId].systemArch + "</p>" );
+	$("#daneSensora").append( "<p> systemVendor: " + tableSensors[sensorId].systemVendor + "</p>" );
+	$("#daneSensora").append( "<p> systemVersion: " + tableSensors[sensorId].systemVersion + "</p>" );
+
+
+	getMetrics(sensorId);
+	
+}
+
