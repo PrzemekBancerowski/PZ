@@ -1,7 +1,6 @@
 $(document).ready(function(){
     par = decodeURIComponent(window.location.search.substring(1)).split("=");
     if(par[0]=="stat" && par[1]=="created"){
-        debugger;
         $("#Warning").html("Konto założone, teraz możesz się zalogować.");
     }
 });
@@ -23,7 +22,6 @@ function login(){
         success: function(res){
             $("#Warning").html("");
             window.location.replace("index.html");
-
         },
         error: function(){
             $("#Warning").html("Zły login lub hasło.");
