@@ -97,7 +97,7 @@ public class UserControllerTest extends AbstractMvcTest {
                 .andReturn();
 
         mockMvc.perform(formLogin("/users/login").user("email", userModel.getEmail()).password(userModel.getPassword()))
-                .andExpect(authenticated().withRoles("USER"));
+                .andExpect(authenticated().withRoles("USER")).andDo(print());
 
         mockMvc.perform(logout("/users/logout")).andExpect(unauthenticated());
 

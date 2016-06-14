@@ -7,16 +7,12 @@ $(document).ready(function(){
 
 function login(){
     $("#Warning").html("");
-    d = {};
-    d.email = $("#InputLogin").val();
-    d.password = $("#InputPassword").val();
+    data = {};
+    data.email = $("#InputLogin").val();
+    data.password = $("#InputPassword").val();
 
-    data = JSON.stringify(d);
     $.ajax({
         type: "POST",
-        headers:{
-            "Content-Type": "application/json;charset=UTF-8"
-        },
         url: "http://localhost:7755/users/login",
         data: data,
         success: function(res){

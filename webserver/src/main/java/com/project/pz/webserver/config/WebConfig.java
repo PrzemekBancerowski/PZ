@@ -1,4 +1,4 @@
-package com.tobesoft.lecter.configuration;
+package com.project.pz.webserver.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.MediaType;
@@ -15,7 +15,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 
     @Override
     public void configureContentNegotiation(ContentNegotiationConfigurer configurer) {
-        configurer.defaultContentType(MediaType.APPLICATION_JSON);
+        configurer.defaultContentType(MediaType.APPLICATION_JSON_UTF8);
     }
 
     @Override

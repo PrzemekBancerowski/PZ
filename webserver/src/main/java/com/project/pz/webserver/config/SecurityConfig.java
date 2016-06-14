@@ -13,6 +13,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
+import org.springframework.security.web.authentication.logout.HttpStatusReturningLogoutSuccessHandler;
 
 /**
  * Created by Piotr Sołtysiak on 2016-05-09.
@@ -42,12 +43,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
-                .and().csrf().disable().exceptionHandling().authenticationEntryPoint(authenticationEntryPoint)
+        http
+                .csrf().disable().exceptionHandling().authenticationEntryPoint(authenticationEntryPoint)
                 .and().formLogin().loginProcessingUrl("/users/login").usernameParameter("email").permitAll()
                 .and().logout().logoutUrl("/users/logout").logoutSuccessUrl("/").permitAll()
                 .and().authorizeRequests().antMatchers("/users/**").permitAll()//.antMatchers("/**").authenticated()
                 .and().formLogin().successHandler(authenticationSuccessHandler)
                 .and().formLogin().failureHandler(authenticationFailureHandler);
+
+        http.headers().cacheControl();
+        //.antMatchers("/api/**").authenticated()
     }
 }

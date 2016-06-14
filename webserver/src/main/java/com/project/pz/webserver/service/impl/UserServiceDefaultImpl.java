@@ -34,7 +34,7 @@ public class UserServiceDefaultImpl implements UserService {
 
     @Override
     public User getUserByEmail(String email) {
-        return userRepository.findOneByEmail(email).get();
+        return userRepository.findOneByEmail(email);
     }
 
     public UserModel getLoggedUser() {
