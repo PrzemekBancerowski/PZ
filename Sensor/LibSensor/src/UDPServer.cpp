@@ -26,6 +26,7 @@ void UDPServer::HandleReceive(const boost::system::error_code& error,
     if (!error || error == boost::asio::error::message_size)
     {
         std::string dataReceived;
+        std::cout << dataReceived << std::endl;
         std::copy(_recv_buffer.begin(), _recv_buffer.begin()+bytesTransferred, std::back_inserter(dataReceived));
         StartReceive();
     }
