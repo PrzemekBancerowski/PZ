@@ -1,8 +1,10 @@
 //
 // Created by pSolT on 23.04.16.
 //
-
+extern "C" {
 #include <sigar.h>
+#include <sigar_format.h>
+}
 #include "../include/CPUSensor.h"
 
 CPUSensor::CPUSensor()
@@ -57,7 +59,6 @@ Json::Value CPUSensor::GetData() const
     Json::Value root;
 
 
-
     sigar_t *sigar_cpu;
     sigar_cpu_t old;
     sigar_cpu_t current;
@@ -65,8 +66,13 @@ Json::Value CPUSensor::GetData() const
     sigar_open(&sigar_cpu);
     sigar_cpu_get(sigar_cpu, &old);
 
+    sigar_cpu_perc_t perc;
 
-    root["Usage"] = (float)old.total;
+    std::this_thread::sleep_for(std::chrono::milliseconds(100));
+
+    sigar_cpu_get(sigar_cpu, &current);
+    sigar_cpu_perc_calculate(&old, &current, &perc);
+    root["Usage"] = (float)perc.combined * 100;
 
 //    parameters["Cache"] = 2;
 

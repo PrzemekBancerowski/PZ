@@ -3,7 +3,7 @@ configuration:
   host: 127.0.0.1
   port: 9999
   data_interval: 1000
-  metadata_interval: 19999
+  metadata_interval: 10
 components:
   cpu: true
   memory: true

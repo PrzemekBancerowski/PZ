@@ -15,6 +15,8 @@ extern "C" {
 #include <sigar_format.h>
 }
 
+#include <thread>
+#include <chrono>
 
 class CPUSensor : public ISensor{
 public:

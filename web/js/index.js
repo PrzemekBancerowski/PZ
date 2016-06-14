@@ -17,6 +17,8 @@ $(document).ready(function(){
             $("#Warning").html("Błąd serwera.");
         }
     });
+
+    $('#nazwa').keyup(searchFilter);
 });
 
 function enableButton() {
@@ -33,7 +35,6 @@ function chooseMonitor(){
         $("#metryki").fadeOut();
     }
 }
-
 
 function getListSensors(){
     var selectedMonitor = $('#wybierzMonitor').val();
@@ -73,7 +74,6 @@ function getMetrics(sensorId){
 }
 
 
-
 function addSensorsToList(listOfSensors){
     var select = document.getElementById("sel2");
     $(select).empty();
@@ -99,7 +99,6 @@ function addMetricsToList(listOfMetrics){
 function changeFunc() {
 	var obj = document.getElementById("sel2");
 	sensorId = obj.options[obj.selectedIndex].value;
-
 
     $("#daneSensora").fadeIn();
     $("#metryki").fadeIn();
@@ -133,7 +132,6 @@ function changeFunc() {
 function changeFunc2(){
     var obj = $("#sel3");
     metricId = obj.val();
-
     if(tableMetrics[metricId].metricType == "COMPLEX"){
         $("#delMetricBtn").attr("disabled", false);
     }
@@ -157,4 +155,24 @@ function delMetric(){
         }
 
     });
+}
+function searchFilter(){
+	var listOfSensors = document.getElementById("sel2");
+	var valThis = $('#nazwa').val().toLowerCase();
+    if(valThis == ""){
+         for(i=0; i < listOfSensors.length; ++i)
+         	listOfSensors.options[i].style.display = 'block';
+
+    } else {
+        for(i=0; i < listOfSensors.length; ++i) {
+
+            var text = listOfSensors.options[i].text.toLowerCase();
+            var match = text.indexOf(valThis);
+            if (match >= 0) {
+                listOfSensors.options[i].style.display = 'block';
+            } else {
+                listOfSensors.options[i].style.display = 'none';
+            }
+        }
+   };
 }
