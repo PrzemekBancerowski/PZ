@@ -60,8 +60,11 @@ void Worker::run()
     boost::asio::io_service io_service;
     _udpClient = new UDPClient(io_service, _targetHost, _targetPort);
     io_service.run();
+    unsigned metdataIntervalCount = 0;
+
     while(true)
     {
+        metdataIntervalCount++;
         std::chrono::steady_clock::time_point tp = std::chrono::steady_clock::now() + std::chrono::milliseconds(_dataInterval);
 
         //zbierz dane
@@ -75,11 +78,20 @@ void Worker::run()
         for(int i=0;i<_sensors.size();i++)
         {
             data[_sensors[i]->GetTypeName()] = _sensors[i]->GetData();
-            metaData[_sensors[i]->GetTypeName()] = _sensors[i]->GetMetaData();
+        }
+        json["data"] = data;
+        if(metdataIntervalCount == _metadataInterval)
+        {
+            for(int i=0;i<_sensors.size();i++)
+            {
+                metaData[_sensors[i]->GetTypeName()] = _sensors[i]->GetMetaData();
+            }
+            metdataIntervalCount = 0;
+            json["metadata"] = metaData;
         }
 
-        json["data"] = data;
-        json["metadata"] = metaData;
+
+
 
 
 

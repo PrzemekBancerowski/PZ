@@ -30,8 +30,7 @@ Json::Value MemorySensor::GetMetaData() const
     sigar_open(&sigar_mem);
     sigar_mem_get(sigar_mem, &current);
 
-    int totalMemory = current.total;
-    metaData["size"] = totalMemory;
+    metaData["size"] = (long long int)current.total;
 
     sigar_close(sigar_mem);
 
