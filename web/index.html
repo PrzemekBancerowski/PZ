@@ -27,13 +27,13 @@
             <div class="container row">
                 <form role="form">
                     <div class="form-group col-md-6">
-                        <select class="form-control" id="wybierzMonitor">
+                        <select class="form-control" id="wybierzMonitor" onchange="enableButton()">
                             <option value="" selected disabled>Wybierz monitor...</option>
                         </select>
                         <br>
                     </div>
                     <div class="col-md-3">
-                        <button type="button" class="btn btn-primary" onclick="chooseMonitor()">Wybierz</button>
+                        <button id="chooseMonitor" type="button" class="btn btn-primary" onclick="chooseMonitor()" disabled>Wybierz</button>
                     </div>
                 </form>
             </div>
