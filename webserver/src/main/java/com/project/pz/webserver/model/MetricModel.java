@@ -81,4 +81,17 @@ public class MetricModel {
     public void setWindowSize(Integer windowSize) {
         this.windowSize = windowSize;
     }
+
+    @Override
+    public String toString() {
+        return "MetricModel{" +
+                "id='" + id + '\'' +
+                ", description='" + description + '\'' +
+                ", metricType=" + metricType +
+                ", measure=" + measure +
+                ", userId='" + userId + '\'' +
+                ", interval=" + interval +
+                ", windowSize=" + windowSize +
+                '}';
+    }
 }

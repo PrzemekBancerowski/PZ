@@ -1,5 +1,6 @@
 package com.project.pz.webserver.model;
 
+import com.google.common.base.CharMatcher;
 import com.project.pz.webserver.entity.User;
 
 /**
@@ -44,5 +45,14 @@ public class UserModel {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    @Override
+    public String toString() {
+        return "UserModel{" +
+                "id=" + id +
+                ", email='" + email + '\'' +
+                ", password='" + CharMatcher.ANY.replaceFrom(password, '*') + '\'' +
+                '}';
     }
 }

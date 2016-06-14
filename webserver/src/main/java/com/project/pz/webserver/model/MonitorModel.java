@@ -40,6 +40,15 @@ public class MonitorModel {
     }
 
     @Override
+    public String toString() {
+        return "MonitorModel{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", address='" + address + '\'' +
+                '}';
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
