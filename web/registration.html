@@ -14,23 +14,41 @@
                                         
         <!-- Custom CSS -->
         <link href="css/login_custom.css" rel="stylesheet">
+        <link href="css/custom.css" rel="stylesheet">
     </head>
     <body>
         <div class="site-wrapper">
             <div class="site-wrapper-inner">
-                <div class="cover-container">                 
+                <div class="cover-container">
+                    <div class="masthead clearfix">
+                        <div class="inner">
+                            <nav>
+                                <ul class="nav masthead-nav">
+                                    <li><a href="login.html">Logowanie</a></li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                    
                     <div class="inner cover">
-                        <h2 class="cover-heading">Nowe konto</h2>
+                        <h1 class="cover-heading">System monitorowania rozproszonych zasobów komputerowych</h1>
                         <form>
                             <div class="form-group">
-                                <label for="InputLogin">Email</label>
-                                <input type="email" class="form-control formField" id="InputLogin" placeholder="Email">
+                                <label for="InputLogin">Adres e-mail</label>
+                                <input type="" class="form-control formField" id="InputLogin" placeholder="Login">
                             </div>
                             <div class="form-group">
                                 <label for="InputPassword">Hasło</label>
-                                <input type="password" class="form-control formField" id="InputPassword" placeholder="Haslo">
+                                <input type="password" class="form-control formField" id="InputPassword" placeholder="Hasło">
                             </div>
-                            <button type="submit" class="btn btn-lg btn-default">Zarejestruj</button>
+                            <div class="form-group">
+                                <label for="InputPassword">Powtórz hasło</label>
+                                <input type="password" class="form-control formField" id="RepeatPassword" placeholder="Powtórz hasło">
+                            </div>
+                            <button type="button" class="btn btn-lg btn-default" onclick="register()">Zarejestruj się</button>
+                            <div>
+                                <label id="Warning" class="warning"></label>
+                            </div>
                         </form>
                     </div>
                 </div>
@@ -40,6 +58,7 @@
         
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
+        <script src="js/register.js"></script>
     </body>
 </html>
 
