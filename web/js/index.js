@@ -13,6 +13,8 @@ $(document).ready(function(){
             $("#Warning").html("Błąd serwera.");
         }
     });
+
+    $('#nazwa').keyup(searchFilter);
 });
 
 function enableButton() {
@@ -24,9 +26,7 @@ function chooseMonitor(){
 	
 	if(id != null)
 		getListSensors();
-
 }
-
 
 function getListSensors(){
     var selectedMonitor = $('#wybierzMonitor').val();
@@ -68,7 +68,6 @@ function getMetrics(sensorId){
 }
 
 
-
 function addSensorsToList(listOfSensors){
 
     var select = document.getElementById("sel2");
@@ -76,7 +75,6 @@ function addSensorsToList(listOfSensors){
     for(sensor in listOfSensors) {
         select.options[select.options.length] = new Option(listOfSensors[sensor].hostName, sensor);
     }
-
 }
 
 function displayTextAboutSensor(id){
@@ -91,7 +89,6 @@ function changeFunc() {
 	var obj = document.getElementById("sel2");
 	var sensorId = obj.options[obj.selectedIndex].value;
 
-
 	$("#daneSensora").append( "<p> id: " + tableSensors[sensorId].id + "</p>" );
 	$("#daneSensora").append( "<p> hostName: " + tableSensors[sensorId].hostName + "</p>" );
 	$("#daneSensora").append( "<p> cpu: " + tableSensors[sensorId].cpu + "</p>" );
@@ -103,8 +100,26 @@ function changeFunc() {
 	$("#daneSensora").append( "<p> systemVendor: " + tableSensors[sensorId].systemVendor + "</p>" );
 	$("#daneSensora").append( "<p> systemVersion: " + tableSensors[sensorId].systemVersion + "</p>" );
 
-
 	getMetrics(sensorId);
-	
 }
 
+function searchFilter(){
+	var listOfSensors = document.getElementById("sel2");
+	var valThis = $('#nazwa').val().toLowerCase();
+    if(valThis == ""){
+         for(i=0; i < listOfSensors.length; ++i)
+         	listOfSensors.options[i].style.display = 'block';
+
+    } else {
+        for(i=0; i < listOfSensors.length; ++i) {
+
+            var text = listOfSensors.options[i].text.toLowerCase();
+            var match = text.indexOf(valThis);
+            if (match >= 0) {
+                listOfSensors.options[i].style.display = 'block';
+            } else {
+                listOfSensors.options[i].style.display = 'none';
+            }
+        }
+   };
+}
