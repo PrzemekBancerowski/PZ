@@ -1,0 +1,95 @@
+{
+   "data" : {
+      "CPU" : {
+         "Usage" : 41643912
+      },
+      "ID" : "C4E98412E2E4",
+      "Memory" : {
+         "usage" : 18.798985637349482
+      },
+      "NetIF" : {
+         "enp0s25" : {
+            "rx_bytes" : 0,
+            "rx_dropped" : 0,
+            "rx_overruns" : 0,
+            "rx_packets" : 0,
+            "speed" : 18446744073709551615,
+            "tx_bytes" : 0,
+            "tx_collisions" : 0,
+            "tx_dropped" : 0,
+            "tx_packets" : 0
+         },
+         "lo" : {
+            "rx_bytes" : 79378,
+            "rx_dropped" : 0,
+            "rx_overruns" : 0,
+            "rx_packets" : 635,
+            "speed" : 18446744073709551615,
+            "tx_bytes" : 79378,
+            "tx_collisions" : 0,
+            "tx_dropped" : 0,
+            "tx_packets" : 635
+         },
+         "virbr0" : {
+            "rx_bytes" : 0,
+            "rx_dropped" : 0,
+            "rx_overruns" : 0,
+            "rx_packets" : 0,
+            "speed" : 18446744073709551615,
+            "tx_bytes" : 0,
+            "tx_collisions" : 0,
+            "tx_dropped" : 0,
+            "tx_packets" : 0
+         },
+         "wlp0s20u6" : {
+            "rx_bytes" : 247357288,
+            "rx_dropped" : 2379,
+            "rx_overruns" : 0,
+            "rx_packets" : 263387,
+            "speed" : 18446744073709551615,
+            "tx_bytes" : 50256909,
+            "tx_collisions" : 0,
+            "tx_dropped" : 0,
+            "tx_packets" : 230762
+         }
+      },
+      "Proc" : {
+         "idle" : 0,
+         "running" : 2,
+         "sleeping" : 191,
+         "stopped" : 0,
+         "threads" : 597,
+         "total" : 196,
+         "zombie" : 3
+      },
+      "System" : null
+   },
+   "metadata" : {
+      "CPU" : {
+         "cache_size" : 6144,
+         "mhz_max" : 3700,
+         "mhz_min" : 800,
+         "model" : "Core(TM) i5-4590 CPU @ 3.30GHz",
+         "total_cores" : 4,
+         "vendor" : "Intel"
+      },
+      "Memory" : {
+         "size" : -402771968
+      },
+      "NetIF" : {
+         "default_gateway" : "192.168.0.1",
+         "default_gateway_interface" : "wlp0s20u6",
+         "domain_name" : "(none)",
+         "host_name" : "pSoLT-machina",
+         "primary_dns" : "62.179.1.62",
+         "secondary_dns" : "62.179.1.63"
+      },
+      "Proc" : null,
+      "System" : {
+         "arch" : "x86_64",
+         "name" : "Linux",
+         "vendor" : "Fedora",
+         "version" : "4.1.10-100.fc21.x86_64"
+      }
+   }
+}
