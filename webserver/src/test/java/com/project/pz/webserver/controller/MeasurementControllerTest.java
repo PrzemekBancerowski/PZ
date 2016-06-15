@@ -48,7 +48,7 @@ public class MeasurementControllerTest extends AbstractMvcTest {
     protected SensorController sensorController;
 
     @InjectMocks
-    protected MetricsController metricsController;
+    protected MetricController metricController;
 
     @InjectMocks
     private UserController userController;
@@ -73,7 +73,7 @@ public class MeasurementControllerTest extends AbstractMvcTest {
         ReflectionTestUtils.setField(measurementController, "measurementService", measurementService);
         ReflectionTestUtils.setField(monitorController, "monitorService", monitorService);
         ReflectionTestUtils.setField(sensorController, "sensorService", sensorService);
-        ReflectionTestUtils.setField(metricsController, "metricService", metricService);
+        ReflectionTestUtils.setField(metricController, "metricService", metricService);
         ReflectionTestUtils.setField(userController, "userService", userService);
 
         authorize();
@@ -118,7 +118,7 @@ public class MeasurementControllerTest extends AbstractMvcTest {
         metricModel.setMeasure(Measure.CPU);
         metricModel.setMetricType(MetricType.SIMPLE);
         metricModel.setWindowSize(100);
-        metricModel.setUserId("TEST_USER");
+        metricModel.setUserId(1);
 
         MvcResult addMetricResult = mockMvc.perform(post("/monitors/" + monitorId + "/sensors/" + sensorId + "/metrics")
                 .content(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(metricModel))
@@ -166,6 +166,6 @@ public class MeasurementControllerTest extends AbstractMvcTest {
 
     @Override
     protected Object[] getInjectedControllers() {
-        return new Object[]{measurementController, monitorController, sensorController, metricsController, userController};
+        return new Object[]{measurementController, monitorController, sensorController, metricController, userController};
     }
 }

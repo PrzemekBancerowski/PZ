@@ -1,5 +1,7 @@
 package com.project.pz.webserver.service;
 
+import com.project.pz.webserver.exception.MonitorNotFoundException;
+
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -10,6 +12,6 @@ import java.util.List;
  */
 public interface MeasurementService {
 
-    List<BigDecimal> getMeasurements(String monitorId, String sensorId, String metricId, Long fromTime, Long toTime);
+    List<BigDecimal> getMeasurements(String monitorId, String sensorId, String metricId, Long fromTime, Long toTime) throws MonitorNotFoundException;
 
 }

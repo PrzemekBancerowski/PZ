@@ -1,5 +1,6 @@
 package com.project.pz.webserver.service;
 
+import com.project.pz.webserver.exception.MonitorNotFoundException;
 import com.project.pz.webserver.model.SensorModel;
 
 import java.util.List;
@@ -10,6 +11,6 @@ import java.util.List;
  */
 public interface SensorService {
 
-    List<SensorModel> getSensors(String monitorId);
+    List<SensorModel> getSensors(String monitorId) throws MonitorNotFoundException;
 
 }
