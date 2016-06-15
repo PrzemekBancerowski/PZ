@@ -1,12 +1,11 @@
 package com.project.pz.webserver.controller;
 
+import com.project.pz.webserver.exception.MonitorNotFoundException;
 import com.project.pz.webserver.service.MeasurementService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -23,7 +22,7 @@ public class MeasurementController {
     @RequestMapping(value = "monitors/{monitorId}/sensors/{sensorId}/metrics/{metricId}/measurements", method = RequestMethod.GET)
     public List<BigDecimal> getMeasurements(@PathVariable String monitorId, @PathVariable String sensorId, @PathVariable String metricId,
                                             @RequestParam(value = "fromTime", required = false) Long fromTime,
-                                            @RequestParam(value = "toTime", required = false) Long toTime) {
+                                            @RequestParam(value = "toTime", required = false) Long toTime) throws MonitorNotFoundException {
         return measurementService.getMeasurements(monitorId, sensorId, metricId, fromTime, toTime);
     }
 

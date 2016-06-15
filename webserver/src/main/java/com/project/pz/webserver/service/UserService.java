@@ -15,4 +15,8 @@ public interface UserService {
 
     User getUserByEmail(String email);
 
+    UserModel currentUser();
+
+    UserModel login(UserModel model);
+
 }

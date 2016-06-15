@@ -1,5 +1,6 @@
 package com.project.pz.webserver.controller;
 
+import com.project.pz.webserver.exception.MonitorNotFoundException;
 import com.project.pz.webserver.model.SensorModel;
 import com.project.pz.webserver.service.SensorService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +23,7 @@ public class SensorController {
 
     @RequestMapping(value = "monitors/{monitorId}/sensors", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
     @ResponseStatus(HttpStatus.OK)
-    public List<SensorModel> getSensors(@PathVariable String monitorId) {
+    public List<SensorModel> getSensors(@PathVariable String monitorId) throws MonitorNotFoundException {
         return sensorService.getSensors(monitorId);
     }
 }

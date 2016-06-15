@@ -6,6 +6,8 @@ monitor-configuration:
     address: https://boiling-refuge-92080.herokuapp.com
 
 spring:
+  application:
+    index: login.html
   jpa:
     database: POSTGRESQL
     show-sql: false

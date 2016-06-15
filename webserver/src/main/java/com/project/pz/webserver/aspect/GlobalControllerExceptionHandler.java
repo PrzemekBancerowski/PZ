@@ -1,6 +1,8 @@
 package com.project.pz.webserver.aspect;
 
 import com.project.pz.webserver.exception.MetricNotFoundException;
+import com.project.pz.webserver.exception.MetricOwnerException;
+import com.project.pz.webserver.exception.MonitorNotFoundException;
 import org.apache.log4j.Logger;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -33,10 +35,24 @@ public class GlobalControllerExceptionHandler {
         return "Nie odnaleziono użytkownika";
     }
 
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ExceptionHandler(MonitorNotFoundException.class)
+    @ResponseBody
+    String handleMonitorNotFoundException(MonitorNotFoundException ex) {
+        return logAndReturn("Nie odnaleziono monitora", ex);
+    }
+
+    @ResponseStatus(HttpStatus.NOT_ACCEPTABLE)
+    @ExceptionHandler(MetricOwnerException.class)
+    @ResponseBody
+    String handleMetricOwnerException(MetricOwnerException ex) {
+        return logAndReturn(ex.getMessage(), ex);
+    }
+
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ExceptionHandler(Exception.class)
     @ResponseBody
-    String handleUserNotFoundException(Exception ex) {
+    String handleOtherException(Exception ex) {
         return logAndReturn("Wystąpił nieoczekiwany błąd", ex);
     }
 

@@ -50,6 +50,5 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and().formLogin().failureHandler(authenticationFailureHandler);
 
         http.headers().cacheControl();
-        //.antMatchers("/api/**").authenticated()
     }
 }

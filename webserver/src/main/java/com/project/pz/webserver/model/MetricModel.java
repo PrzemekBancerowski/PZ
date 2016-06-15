@@ -17,7 +17,7 @@ public class MetricModel {
 
     private Measure measure;
 
-    private String userId;
+    private Integer userId;
 
     private Integer interval;
 
@@ -58,11 +58,11 @@ public class MetricModel {
         this.measure = measure;
     }
 
-    public String getUserId() {
+    public Integer getUserId() {
         return userId;
     }
 
-    public void setUserId(String userId) {
+    public void setUserId(Integer userId) {
         this.userId = userId;
     }
 

@@ -40,10 +40,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * Contact: piotrek.soltysiak@gmail.com
  */
 @Transactional
-public class MetricsControllerTest extends AbstractMvcTest {
+public class MetricControllerTest extends AbstractMvcTest {
 
     @InjectMocks
-    private MetricsController metricsController;
+    private MetricController metricController;
 
     @InjectMocks
     private MonitorController monitorController;
@@ -73,7 +73,7 @@ public class MetricsControllerTest extends AbstractMvcTest {
     public void init() throws Exception {
         ReflectionTestUtils.setField(sensorController, "sensorService", sensorService);
         ReflectionTestUtils.setField(monitorController, "monitorService", monitorService);
-        ReflectionTestUtils.setField(metricsController, "metricService", metricService);
+        ReflectionTestUtils.setField(metricController, "metricService", metricService);
         ReflectionTestUtils.setField(userController, "userService", userService);
 
         authorize();
@@ -172,7 +172,7 @@ public class MetricsControllerTest extends AbstractMvcTest {
         metricModel.setMeasure(Measure.CPU);
         metricModel.setMetricType(MetricType.SIMPLE);
         metricModel.setWindowSize(100);
-        metricModel.setUserId("TEST_USER");
+        metricModel.setUserId(1);
 
         MvcResult addMetricResult = mockMvc.perform(post("/monitors/" + monitorId + "/sensors/" + sensorId + "/metrics")
                 .content(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(metricModel))
@@ -253,6 +253,6 @@ public class MetricsControllerTest extends AbstractMvcTest {
 
     @Override
     protected Object[] getInjectedControllers() {
-        return new Object[]{metricsController, monitorController, sensorController, userController};
+        return new Object[]{metricController, monitorController, sensorController, userController};
     }
 }

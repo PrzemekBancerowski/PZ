@@ -1,11 +1,17 @@
 package com.project.pz.webserver.service.impl;
 
-import com.google.common.collect.Lists;
+import com.project.pz.webserver.exception.MonitorNotFoundException;
+import com.project.pz.webserver.model.MonitorModel;
 import com.project.pz.webserver.model.SensorModel;
+import com.project.pz.webserver.service.MonitorService;
 import com.project.pz.webserver.service.SensorService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.*;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
+import org.springframework.web.util.UriComponentsBuilder;
 
-import java.math.BigInteger;
 import java.util.List;
 
 /**
@@ -15,31 +21,28 @@ import java.util.List;
 @Service
 public class SensorServiceDefaultImpl implements SensorService {
 
+    @Autowired
+    private MonitorService monitorService;
+
     @Override
-    public List<SensorModel> getSensors(String monitorId) {
-        return mock();
-    }
+    public List<SensorModel> getSensors(String monitorId) throws MonitorNotFoundException {
+        RestTemplate restTemplate = new RestTemplate();
+        MonitorModel monitor = monitorService.getMonitorForId(monitorId);
 
-    private List<SensorModel> mock() {
-        List<SensorModel> sensorModelList = Lists.newArrayList();
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.set("Accept", MediaType.ALL_VALUE);
 
-        for (int i = 1; i<6; i++) {
-            SensorModel sensorModel = new SensorModel();
-            sensorModel.setId("Id_"+i);
-            sensorModel.setHostName("HostName_"+i);
-            sensorModel.setCpu("Cpu_ID_"+i);
-            sensorModel.setCpuVendor("CpuVendor_"+i);
-            sensorModel.setCpuCoreCount(i);
-            sensorModel.setMemorySize(BigInteger.valueOf(i).multiply(BigInteger.valueOf(1073741824)));
-            sensorModel.setSystemName("SystemName_"+i);
-            sensorModel.setSystemArch("SystemArch_"+i);
-            sensorModel.setSystemVendor("SystemVendor_"+i);
-            sensorModel.setSystemVersion("SystemVersion_"+i);
+        UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(monitor.getAddress() + "/sensors");
 
-            sensorModelList.add(sensorModel);
-        }
+        HttpEntity<?> httpEntity = new HttpEntity<>(httpHeaders);
 
+        ResponseEntity<List<SensorModel>> responseEntity = restTemplate.exchange(
+                builder.build().encode().toUri(),
+                HttpMethod.GET,
+                httpEntity,
+                new ParameterizedTypeReference<List<SensorModel>>() {
+                });
 
-        return sensorModelList;
+        return responseEntity.getBody();
     }
 }
