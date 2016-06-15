@@ -4,6 +4,7 @@ var selectedMonitor = null;
 var sensorId = null;
 var metricId = null;
 var intervalHandler = null;
+var tableMeasures = [];
 
 $(document).ready(function(){
 	$.ajax({
@@ -61,7 +62,7 @@ function getListSensors(){
 function getMetrics(sensorId){
    selectedMonitor = $('#wybierzMonitor').val();
    $.ajax({
-        url: 'http://localhost:7755/monitors/' + selectedMonitor + '/sensors/' + sensorId + '/metrics',
+        url: 'http://localhost:7755/monitors/' + selectedMonitor + '/sensors/' + tableSensors[sensorId].id + '/metrics',
         type: "GET",
         dataType: "json",
         async:false,
@@ -96,6 +97,8 @@ function addMetricsToList(listOfMetrics){
         var str = str + ")";
         select.options[select.options.length] = new Option(str, metric);
     }
+    select.selectedIndex = 0;
+    metricId = 0;
 }
 
 
@@ -146,15 +149,19 @@ function changeFunc2(){
 
 function delMetric(){
     $.ajax({
-        url: 'http://localhost:7755/monitors/' + selectedMonitor + '/sensors/' + sensorId + '/metrics/'+ metricId,
+        url: 'http://localhost:7755/monitors/' + selectedMonitor + '/sensors/' + tableSensors[sensorId].id + '/metrics/'+tableMetrics[metricId].id,
         type: "DELETE",
         dataType: "json",
+        headers:{
+            "Content-Type": "application/json;charset=UTF-8"
+        },
         async:false,
         success: function () {
             getMetrics(sensorId);
         },
         error: function () {
             ErrorFunction();
+            getMetrics(sensorId);
         }
 
     });
@@ -182,12 +189,16 @@ function zapiszMetryke(){
     data.windowSize = wind;
     data.description = name;
     data.measure = tableMetrics[met].measure;
+    data.metricType = "COMPLEX";
     data.userId = 0; //userID!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     d = JSON.stringify(data);
     if(interv>0 && wind > 0 && met > 0){
         $.ajax({
-            url: 'http://localhost:7755/monitors/' +selectedMonitor +"/sensors/"+sensorId+"/metrics",
+            url: 'http://localhost:7755/monitors/' +selectedMonitor +"/sensors/"+tableSensors[sensorId].id+"/metrics",
             type: "POST",
+            headers:{
+                "Content-Type": "application/json;charset=UTF-8"
+            },
             data: d,
             dataType: "json",
             async:false,
@@ -240,8 +251,12 @@ function wykresBtn(){
 }
 function showMeasures() {
 	param = {};
-	param.startTime = new Date($("#odKiedy").val());
-	param.endTime = new Date($("#doKiedy").val());
+    var d1 = $("#odKiedy").val();
+    var d2 = $("#doKiedy").val();
+    d1.replace(' ','T');
+    d2.replace(' ','T');
+	param.startTime = new Date(d1);
+	param.endTime = new Date(d2);
 	
 	if($('#liveMeasuresButton').prop('checked')) {
 		param.czestotliwosc = $("#czestotliwosc").val();
@@ -261,18 +276,24 @@ function liveMeasuresFun(param) {
 }
 
 function getSimpleMeasures(param) {
+    var data = {};
+    data.fromTime = param.startTime.getTime();
+    data.toTime = param.endTime.getTime();
+    var d = JSON.stringify(data);
 	$.ajax({
-        url: 'http://localhost:7755/monitors/' + selectedMonitor + "/sensors/" + sensorId + "/metrics/" + metricId + "/measurements?fromTime="+param.startTime.getTime()+"&toTime="+param.endTime.getTime(),
+        url: 'http://localhost:7755/monitors/' + selectedMonitor + "/sensors/" + tableSensors[sensorId].id + "/metrics/" + tableMetrics[metricId].id + "/measurements",
         type: "GET",
+        headers:{
+            "Content-Type": "application/json;charset=UTF-8"
+        },
+        data: data,
         dataType: "json",
-        async:false,
         success: function(data) {
-        	
+        	tableMeasures = data;
         },
         error: function () {
         	ErrorFunction();
         }
-
     });
 }
 
