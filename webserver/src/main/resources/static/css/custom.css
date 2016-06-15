@@ -1,0 +1,77 @@
+html,
+body {
+    height: 100%;
+}
+
+body {
+    text-align: center;
+}
+
+.inner {
+    padding: 30px;
+}
+
+.inner2 {
+    padding: 0 20px;
+}
+
+.my-form-field {
+    width: 70%;
+    margin: 0 auto;
+}
+
+.my-tab {
+    background-color: #ffffff;
+    height: 100%;
+    border-color: #dddddd;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 5px;
+    border-top-left-radius: 0px;
+}
+
+.my-multiselect {
+    min-height: 20em;
+}
+
+.my-list {
+    width: 100%;
+    min-height: 13em;
+}
+
+.checkboxs {
+    text-align: left;
+}
+
+.nav-tabs > li > a:hover{
+    background-color: #006dcc !important;
+    color: white !important;
+}
+
+.nav-tabs > li > a {
+    color: #555555 !important;
+}
+
+.warning{
+    padding-top: 15px;
+}
+
+#hostsData{
+    display:none;
+}
+#daneSensora{
+    display:none;
+}
+#metryki{
+    display:none;
+}
+#dodajMetryke{
+    display:none;
+}
+#opcjeWykresow{
+    display:none;
+}
+.form_datetime > .setHeight{
+    display: inline-block;
+    height: 30px;
+}
