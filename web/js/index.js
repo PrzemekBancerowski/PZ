@@ -6,6 +6,12 @@ var metricId = null;
 var intervalHandler = null;
 var tableMeasures = [];
 
+var dps = []; // dataPoints
+var chart;
+var xVal = 1;
+var yVal = 100;
+var dataLength = 50; // number of dataPoints visible at any point
+
 $(document).ready(function(){
 	$.ajax({
 		type: "GET",
@@ -23,6 +29,8 @@ $(document).ready(function(){
 	//init
 	$("#archiveMeasures").toggle();
     $('#nazwa').keyup(searchFilter);
+
+    
 });
 
 function enableButton() {
@@ -242,6 +250,8 @@ function ErrorFunction(){
 $('input[name=measureType]').change( function() {
    $("#archiveMeasures").toggle();
    $("#liveMeasures").toggle();
+   $("#chartContainer").fadeOut(800);
+
 });
 
 function wykresBtn(){
@@ -250,6 +260,7 @@ function wykresBtn(){
     });
 }
 function showMeasures() {
+    stopLoop();
 	param = {};
     var d1 = $("#odKiedy").val();
     var d2 = $("#doKiedy").val();
@@ -258,12 +269,21 @@ function showMeasures() {
 	param.startTime = new Date(d1);
 	param.endTime = new Date(d2);
 	
+    
+
 	if($('#liveMeasuresButton').prop('checked')) {
+        $("#chartContainer").fadeIn();
+        chartCreate("DANE BIEŻĄCE", "OŚ Y", "area"); //inicjalizacja wykresu
 		param.czestotliwosc = $("#czestotliwosc").val();
 		$('#stopLoopBtn').attr("disabled", false);
 		intervalHandler = setInterval(liveMeasuresFun, param.czestotliwosc*1000, param);
 	} else {
+        $("#chartContainer").fadeIn();
+        chartCreate("DANE ARCHIWALNE", "OŚ Y", "spline"); //inicjalizacja wykresu
 		getSimpleMeasures(param);
+        if(tableMeasures.length === 0 )
+            getSimpleMeasures(param);
+        updateChartWithMeasures();
 	}
 	
 }
@@ -273,6 +293,7 @@ function liveMeasuresFun(param) {
 	param.startTime = new Date(now.getTime() - param.czestotliwosc*1000);
 	param.endTime = now;
 	getSimpleMeasures(param);
+    updateChartWithMeasures();
 }
 
 function getSimpleMeasures(param) {
@@ -300,4 +321,60 @@ function getSimpleMeasures(param) {
 function stopLoop() {
 	window.clearInterval(intervalHandler);
 	$('#stopLoopBtn').attr("disabled", true);
+}
+
+function chartCreate(nazwa, osY, typeChart) {
+    dps = [];
+    xVal=0;
+    chart = new CanvasJS.Chart("chartContainer",
+    {
+        zoomEnabled: true,
+        panEnabled: true,
+        title :{
+            text: nazwa
+        },      
+        animationEnabled: true,  
+        
+        axisY :{
+                title: osY
+        
+            },
+            
+        axisX: {
+           
+                title: "Kroki czasowe"
+            },
+            
+        data: [{
+            type: typeChart,
+            dataPoints: dps 
+        }]
+        
+    });
+
+    // generates first set of dataPoints
+    updateChart(); 
+}
+
+function updateChart(){
+    dps.push({
+                x: xVal,
+                y: yVal
+            });
+            xVal++;
+    
+    if (dps.length > dataLength)
+    {
+        dps.shift();                
+    }
+
+    chart.render();     
+};
+
+function updateChartWithMeasures(){
+    var length = chart.options.data[0].dataPoints.length;
+    for(var i = 0 ; i < tableMeasures.length; ++i){
+        chart.options.data[0].dataPoints.push({ y: tableMeasures[i]});
+    }
+    chart.render();
 }
