@@ -47,7 +47,7 @@ public class SensorMetadata implements Serializable {
 
         cpu_model = (String) cpu.get("model");
         cpu_vendor = (String) cpu.get("vendor");
-        cpu_cores = (String) cpu.get("vendor");
+        cpu_cores = (String) cpu.get("total_cores");
         cpu_cache = Integer.toString((Integer) cpu.get("cache_size"));
 
         hostname = (String) netIf.get("host_name");
