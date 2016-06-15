@@ -18,7 +18,7 @@ public class QueryFactory {
     }
 
     public Query hostQuery() throws SQLException {
-        String sqlQuery = " SELECT " + SENSOR_METADATA.sensorId + ", " + SENSOR_METADATA.hostname +
+        String sqlQuery = " SELECT " + SENSOR_METADATA.sensorId + " as id, " + SENSOR_METADATA.hostname + " as host " +
                           " FROM " + DatabaseTables.SENSOR_METADATA_TABLE+
                           " GROUP BY " + SENSOR_METADATA.sensorId + ", " + SENSOR_METADATA.hostname;
 
@@ -26,12 +26,19 @@ public class QueryFactory {
         return new Query(statement);
     }
 
-    public Query sensorMetadataQuery(String id) throws SQLException {
+    public Query sensorQuery(String id) throws SQLException {
         String sqlQuery = " SELECT * FROM " + DatabaseTables.SENSOR_METADATA_TABLE +
                           " WHERE " + SENSOR_METADATA.sensorId + " = ?";
 
         PreparedStatement statement = dbConnection.prepareStatement(sqlQuery);
         statement.setString(1, id);
+        return new Query(statement);
+    }
+
+    public Query sensorsQuery() throws SQLException {
+        String sqlQuery = " SELECT * FROM " + DatabaseTables.SENSOR_METADATA_TABLE;
+
+        PreparedStatement statement = dbConnection.prepareStatement(sqlQuery);
         return new Query(statement);
     }
 

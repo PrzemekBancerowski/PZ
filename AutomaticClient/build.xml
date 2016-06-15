@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- WARNING: Eclipse auto-generated file.
+              Any modifications will be overwritten.
+              To include a user specific buildfile here, simply create one in the same
+              directory with the processing instruction <?eclipse.ant.import?>
+              as the first entry and export the buildfile again. --><project basedir="." default="build" name="AutomaticClient">
+    <property environment="env"/>
+    <property name="ECLIPSE_HOME" value="../../Users/XEVOSS/Desktop/eclipse-jee-mars-1-win32-x86_64/eclipse/"/>
+    <property name="debuglevel" value="source,lines,vars"/>
+    <property name="target" value="1.8"/>
+    <property name="source" value="1.8"/>
+    <path id="AutomaticClient.classpath">
+        <pathelement location="bin"/>
+        <pathelement location="lib/antlr-2.7.5.jar"/>
+        <pathelement location="lib/aopalliance-repackaged-2.3.0-b10.jar"/>
+        <pathelement location="lib/asm-debug-all-5.0.2.jar"/>
+        <pathelement location="lib/avalon-logkit-2.1.jar"/>
+        <pathelement location="lib/bcprov-jdk16-1.45.jar"/>
+        <pathelement location="lib/commons-codec-1.6.jar"/>
+        <pathelement location="lib/commons-collections-3.2.1.jar"/>
+        <pathelement location="lib/commons-io-2.4.jar"/>
+        <pathelement location="lib/commons-lang-2.4.jar"/>
+        <pathelement location="lib/commons-logging-1.1.3.jar"/>
+        <pathelement location="lib/commons-validator-1.4.0.jar"/>
+        <pathelement location="lib/gson-2.3.jar"/>
+        <pathelement location="lib/guava-18.0.jar"/>
+        <pathelement location="lib/hk2-api-2.3.0-b10.jar"/>
+        <pathelement location="lib/hk2-locator-2.3.0-b10.jar"/>
+        <pathelement location="lib/hk2-utils-2.3.0-b10.jar"/>
+        <pathelement location="lib/httpclient-4.3.5.jar"/>
+        <pathelement location="lib/httpclient-cache-4.3.5.jar"/>
+        <pathelement location="lib/httpcore-4.3.2.jar"/>
+        <pathelement location="lib/httpmime-4.3.5.jar"/>
+        <pathelement location="lib/jackson-annotations-2.4.2.jar"/>
+        <pathelement location="lib/jackson-core-2.4.2.jar"/>
+        <pathelement location="lib/jackson-databind-2.4.2.jar"/>
+        <pathelement location="lib/jackson-jaxrs-base-2.4.2.jar"/>
+        <pathelement location="lib/jackson-jaxrs-json-provider-2.4.2.jar"/>
+        <pathelement location="lib/jackson-module-jaxb-annotations-2.4.2.jar"/>
+        <pathelement location="lib/javassist-3.18.1-GA.jar"/>
+        <pathelement location="lib/javax.annotation-api-1.2.jar"/>
+        <pathelement location="lib/javax.inject-2.3.0-b10.jar"/>
+        <pathelement location="lib/javax.servlet-api-3.0.1.jar"/>
+        <pathelement location="lib/javax.ws.rs-api-2.0.1.jar"/>
+        <pathelement location="lib/jaxb-api-2.2.7.jar"/>
+        <pathelement location="lib/jdom-1.0.jar"/>
+        <pathelement location="lib/jersey-client.jar"/>
+        <pathelement location="lib/jersey-common.jar"/>
+        <pathelement location="lib/jersey-container-servlet-core.jar"/>
+        <pathelement location="lib/jersey-container-servlet.jar"/>
+        <pathelement location="lib/jersey-guava-2.12.jar"/>
+        <pathelement location="lib/jersey-media-json-jackson-2.11.jar"/>
+        <pathelement location="lib/jersey-server.jar"/>
+        <pathelement location="lib/joda-time-2.4.jar"/>
+        <pathelement location="lib/jsch-0.1.53.jar"/>
+        <pathelement location="lib/json-20140107.jar"/>
+        <pathelement location="lib/lombok.jar"/>
+        <pathelement location="lib/mail.jar"/>
+        <pathelement location="lib/maven-ant-tasks-2.0.9.jar"/>
+        <pathelement location="lib/ojdbc6-11.2.0.3.jar"/>
+        <pathelement location="lib/org.osgi.core-4.2.0.jar"/>
+        <pathelement location="lib/oro-2.0.8.jar"/>
+        <pathelement location="lib/osgi-resource-locator-1.0.1.jar"/>
+        <pathelement location="lib/persistence-api-1.0.jar"/>
+        <pathelement location="lib/servletapi-2.3.jar"/>
+        <pathelement location="lib/validation-api-1.1.0.Final.jar"/>
+        <pathelement location="lib/velocity-1.7.jar"/>
+        <pathelement location="lib/werken-xpath-0.9.4.jar"/>
+    </path>
+    <target name="init">
+        <mkdir dir="bin"/>
+        <copy includeemptydirs="false" todir="bin">
+            <fileset dir="src">
+                <exclude name="**/*.java"/>
+            </fileset>
+        </copy>
+        <copy includeemptydirs="false" todir="bin">
+            <fileset dir=".">
+                <exclude name="**/*.java"/>
+                <exclude name="src/"/>
+                <exclude name="lib/"/>
+            </fileset>
+        </copy>
+        <copy includeemptydirs="false" todir="bin">
+            <fileset dir="lib">
+                <exclude name="**/*.java"/>
+            </fileset>
+        </copy>
+    </target>
+    <target name="clean">
+        <delete dir="bin"/>
+    </target>
+    <target depends="clean" name="cleanall"/>
+    <target depends="build-subprojects,build-project" name="build"/>
+    <target name="build-subprojects"/>
+    <target depends="init" name="build-project">
+        <echo message="${ant.project.name}: ${ant.file}"/>
+        <javac debug="true" debuglevel="${debuglevel}" destdir="bin" includeantruntime="false" source="${source}" target="${target}">
+            <src path="src"/>
+            <src path="."/>
+            <src path="lib"/>
+            <exclude name="src/"/>
+            <exclude name="lib/"/>
+            <classpath refid="AutomaticClient.classpath"/>
+        </javac>
+    </target>
+    <target description="Build all projects which reference this project. Useful to propagate changes." name="build-refprojects"/>
+    <target description="copy Eclipse compiler jars to ant lib directory" name="init-eclipse-compiler">
+        <copy todir="${ant.library.dir}">
+            <fileset dir="${ECLIPSE_HOME}/plugins" includes="org.eclipse.jdt.core_*.jar"/>
+        </copy>
+        <unzip dest="${ant.library.dir}">
+            <patternset includes="jdtCompilerAdapter.jar"/>
+            <fileset dir="${ECLIPSE_HOME}/plugins" includes="org.eclipse.jdt.core_*.jar"/>
+        </unzip>
+    </target>
+    <target description="compile project with Eclipse compiler" name="build-eclipse-compiler">
+        <property name="build.compiler" value="org.eclipse.jdt.core.JDTCompilerAdapter"/>
+        <antcall target="build"/>
+    </target>
+    <target name="Main (1)">
+        <java classname="Main" failonerror="true" fork="yes">
+            <classpath refid="AutomaticClient.classpath"/>
+        </java>
+    </target>
+</project>
