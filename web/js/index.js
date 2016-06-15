@@ -21,8 +21,6 @@ $(document).ready(function(){
 
 	//init
 	$("#archiveMeasures").toggle();
-	$("#odKiedy").datepicker("setDate", new Date(new Date - 12096e5));
-	$("#doKiedy").datepicker("setDate", new Date());
     $('#nazwa').keyup(searchFilter);
 });
 
