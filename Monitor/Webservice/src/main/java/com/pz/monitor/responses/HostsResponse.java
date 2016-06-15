@@ -1,7 +1,5 @@
 package com.pz.monitor.responses;
 
-import com.pz.monitor.database.DatabaseTables.SENSOR_METADATA;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
@@ -12,8 +10,8 @@ public class HostsResponse {
     public HostsResponse(ResultSet resultSet) throws SQLException {
 
         while (resultSet.next()) {
-            String sensorId = resultSet.getString(SENSOR_METADATA.sensorId.toString());
-            String host = resultSet.getString(SENSOR_METADATA.hostname.toString());
+            String sensorId = resultSet.getString("id");
+            String host = resultSet.getString("host");
 
             if (!hosts.containsKey(host)) {
                 hosts.put(host, new LinkedList<>());

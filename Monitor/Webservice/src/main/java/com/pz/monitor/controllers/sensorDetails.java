@@ -37,7 +37,7 @@ public class SensorDetails extends Base {
 
     @GET
     @Path("/simple")
-    @Produces(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.TEXT_PLAIN)
     public Response getSimple(@BeanParam SimpleSensorDetailsRequest request) {
         try {
             request.validate();
