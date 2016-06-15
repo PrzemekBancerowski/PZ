@@ -36,7 +36,7 @@
                         <br />
                     </div>
                     <div class="col-md-2">
-                        <button id="chooseMonitorButton" type="button" class="btn btn-default" onclick="chooseMonitor()" disabled>Wybierz</button>
+                        <button id="chooseMonitorButton" type="button" class="btn btn-primary" onclick="chooseMonitor()" disabled>Wybierz</button>
                     </div>
                     <br/> <br/>
                 </form>
@@ -66,15 +66,15 @@
                             <select multiple class="form-control my-list" id="sel3" onchange="changeFunc2()"></select>
                             <br />
                             <div class="btn-group" data-toggle="buttons" onclick="wykresBtn()">
-                                <label class="btn btn-default active">
+                                <label class="btn btn-primary active">
                                     <input type="radio" name="measureType" id="liveMeasuresButton" checked>Aktualne
                                         </label>
-                                <label class="btn btn-default">
+                                <label class="btn btn-primary">
                                     <input type="radio" name="measureType" id="archiveMeasuresButton">Archiwalne
                                         </label>
                             </div>
-                            <button type="button" class="btn btn-default " onclick="addMetric()" id="addMetricBtn">Dodaj metrykę</button>
-                            <button type="button" class="btn btn-default " onclick="delMetric()" id="delMetricBtn">Usuń metrykę</button>
+                            <button type="button" class="btn btn-primary " onclick="addMetric()" id="addMetricBtn">Dodaj metrykę</button>
+                            <button type="button" class="btn btn-primary " onclick="delMetric()" id="delMetricBtn">Usuń metrykę</button>
                         </div>
                     </div>
                     <div class=" col-md-5 white" id="dodajMetryke">
@@ -96,8 +96,8 @@
                             <div class="col-md-4"><label>Okno czasowe:</label></div>
                             <div class="col-md-7"><input class="form-control formField" type="number" id="oknoInp"/><br/></div>
                         </div>
-                        <button type="button"class="btn btn-default" onclick="zapiszMetryke()">Zapisz</button>
-                        <button type="button" class="btn btn-default" onclick="anulujMetryke()">Anuluj</button>
+                        <button type="button"class="btn btn-primary" onclick="zapiszMetryke()">Zapisz</button>
+                        <button type="button" class="btn btn-primary" onclick="anulujMetryke()">Anuluj</button>
                         </form>
                     </div>
                     <div id="opcjeWykresow">
@@ -128,8 +128,8 @@
                                 </div>
                             </div>
                             <div class="col-md-8">
-                                <button type="button" class="btn btn-default" onClick="showMeasures()">Pokaż pomiary</button>
-                                <button type="button" class="btn btn-default" id="stopLoopBtn" onClick="stopLoop()" disabled>Zatrzymaj</button>
+                                <button type="button" class="btn btn-primary" onClick="showMeasures()">Pokaż pomiary</button>
+                                <button type="button" class="btn btn-primary" id="stopLoopBtn" onClick="stopLoop()" disabled>Zatrzymaj</button>
                             </div>
                         </div>
                     </div>
