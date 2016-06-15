@@ -41,13 +41,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
-                .and().formLogin().loginPage("/users/login").usernameParameter("email").permitAll()
+        http
+                .csrf().disable().exceptionHandling().authenticationEntryPoint(authenticationEntryPoint)
+                .and().formLogin().loginProcessingUrl("/users/login").usernameParameter("email").permitAll()
                 .and().logout().logoutUrl("/users/logout").logoutSuccessUrl("/").permitAll()
-                .and().csrf().disable().exceptionHandling().authenticationEntryPoint(authenticationEntryPoint)
+                .and().authorizeRequests().antMatchers("/users/**").permitAll()//.antMatchers("/**").authenticated()
                 .and().formLogin().successHandler(authenticationSuccessHandler)
                 .and().formLogin().failureHandler(authenticationFailureHandler);
 
-
+        http.headers().cacheControl();
+        //.antMatchers("/api/**").authenticated()
     }
 }

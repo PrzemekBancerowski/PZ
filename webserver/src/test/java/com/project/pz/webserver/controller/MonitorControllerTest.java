@@ -2,8 +2,7 @@ package com.project.pz.webserver.controller;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.project.pz.webserver.AbstractMvcTest;
-import com.project.pz.webserver.model.MonitorDetailModel;
-import com.project.pz.webserver.model.MonitorSimpleModel;
+import com.project.pz.webserver.model.MonitorModel;
 import com.project.pz.webserver.service.MonitorService;
 import com.project.pz.webserver.service.MonitorServiceTest;
 import org.junit.Before;
@@ -13,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.test.util.ReflectionTestUtils;
 import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -25,6 +25,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * Created by Piotr Sołtysiak on 2016-05-18.
  * Contact: piotrek.soltysiak@gmail.com
  */
+@Transactional
 public class MonitorControllerTest extends AbstractMvcTest {
 
     @InjectMocks
@@ -47,22 +48,9 @@ public class MonitorControllerTest extends AbstractMvcTest {
                 .andExpect(content().encoding(EXPECTED_ENCODING))
                 .andReturn();
 
-        List<MonitorSimpleModel> monitorList = mapper.readValue(result.getResponse().getContentAsString(), new TypeReference<List<MonitorSimpleModel>>() {
+        List<MonitorModel> monitorList = mapper.readValue(result.getResponse().getContentAsString(), new TypeReference<List<MonitorModel>>() {
         });
         MonitorServiceTest.testMonitorList(monitorList);
-    }
-
-    @Test
-    public void getMonitorForIdTest() throws Exception {
-        MvcResult result = mockMvc.perform(get("/monitors/").param("monitorId", "1"))
-                .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
-                .andDo(print())
-                .andExpect(content().encoding(EXPECTED_ENCODING))
-                .andReturn();
-
-        MonitorDetailModel monitorDetailModel = mapper.readValue(result.getResponse().getContentAsString(), MonitorDetailModel.class);
-        MonitorServiceTest.testMonitorDetailModel(monitorDetailModel);
     }
 
 

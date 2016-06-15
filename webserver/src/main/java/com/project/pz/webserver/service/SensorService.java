@@ -1,6 +1,8 @@
 package com.project.pz.webserver.service;
 
-import com.project.pz.webserver.model.response.SensorMetadataResponse;
+import com.project.pz.webserver.model.SensorModel;
+
+import java.util.List;
 
 /**
  * Created by Piotr Sołtysiak on 2016-05-17.
@@ -8,5 +10,6 @@ import com.project.pz.webserver.model.response.SensorMetadataResponse;
  */
 public interface SensorService {
 
-    SensorMetadataResponse getSensor(Integer sensorId);
+    List<SensorModel> getSensors(String monitorId);
+
 }

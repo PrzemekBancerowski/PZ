@@ -52,3 +52,26 @@ body {
     color: #555555 !important;
 }
 
+.warning{
+    padding-top: 15px;
+}
+
+#hostsData{
+    display:none;
+}
+#daneSensora{
+    display:none;
+}
+#metryki{
+    display:none;
+}
+#dodajMetryke{
+    display:none;
+}
+#opcjeWykresow{
+    display:none;
+}
+.form_datetime > .setHeight{
+    display: inline-block;
+    height: 30px;
+}
