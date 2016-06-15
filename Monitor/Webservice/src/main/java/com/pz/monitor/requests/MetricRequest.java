@@ -3,26 +3,23 @@ package com.pz.monitor.requests;
 import javax.ws.rs.QueryParam;
 
 public class MetricRequest implements Request {
-    @QueryParam("metricId")
-    public String id = "metricId";
-
     @QueryParam("description")
-    public String description = "metric desc";
+    public String description;
 
     @QueryParam("metricType")
-    public String metricType = "metric type";
+    public MetricType metricType = MetricType.SIMPLE;
 
     @QueryParam("measure")
-    public String measure = "metric measure";
+    public Measure measure = Measure.CPU;
 
     @QueryParam("userId")
-    public String userId = "user id ";
+    public Integer userId;
 
     @QueryParam("interval")
-    public Integer interval = 100;
+    public Integer interval;
 
     @QueryParam("windowSize")
-    public Integer windowSize = 230;
+    public Integer windowSize;
 
 
     @Override
@@ -31,6 +28,17 @@ public class MetricRequest implements Request {
 
     @Override
     public void validate() {
+        boolean isCorrect = description!=null && userId!=null && interval!=null && windowSize!=null;
+        if (!isCorrect) throw new IllegalStateException("Invalid payload");
     }
 
+    public enum Measure {
+        CPU,
+        MEMORY,
+        NETWORK;
+    }
+
+    public enum MetricType {
+        SIMPLE, COMPLEX
+    }
 }

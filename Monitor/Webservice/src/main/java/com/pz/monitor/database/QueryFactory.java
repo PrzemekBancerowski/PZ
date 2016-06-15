@@ -2,7 +2,10 @@ package com.pz.monitor.database;
 
 import com.pz.monitor.database.DatabaseTables.SENSOR_DETAILS;
 import com.pz.monitor.database.DatabaseTables.SENSOR_METADATA;
+import com.pz.monitor.database.DatabaseTables.METRICS;
+import com.pz.monitor.helpers.CreateTableHelper;
 import com.pz.monitor.requests.ComplexSensorDetailsRequest;
+import com.pz.monitor.requests.MetricRequest;
 import com.pz.monitor.requests.SimpleSensorDetailsRequest;
 
 import java.sql.Connection;
@@ -69,6 +72,59 @@ public class QueryFactory {
         statement.setLong(2, request.endTime);
         statement.setString(3, request.sensorId);
         statement.setInt(4, request.maxCount);
+        return new Query(statement);
+    }
+
+    public Query resetDb() throws SQLException {
+        String sqlQuery = CreateTableHelper.initTablesQuery();
+        PreparedStatement statement = dbConnection.prepareStatement(sqlQuery);
+        return new Query(statement);
+    }
+
+    public Query metricsQuery(String sensorId, int metricsId) throws SQLException {
+        String sqlQuery = " SELECT * FROM " + DatabaseTables.METRICS_TABLE +
+            " WHERE " + METRICS.id + " = ?" +
+            " AND " +  METRICS.sensorId + " = ? ";
+
+        PreparedStatement statement = dbConnection.prepareStatement(sqlQuery);
+        statement.setInt(1, metricsId);
+        statement.setString(2, sensorId);
+        return new Query(statement);
+    }
+
+    public Query createMetrics(MetricRequest request, String sensorId) throws SQLException {
+        String sqlQuery = "INSERT INTO " + DatabaseTables.METRICS_TABLE +
+            " ("+METRICS.sensorId+", "+METRICS.description+", "+METRICS.metricType+", "+METRICS.measure+", "+METRICS.userId+", "+METRICS.interval+", "+METRICS.windowSize+")\n " +
+            " values (?,?,?,?,?,?,?) RETURNING " + METRICS.id;
+
+        PreparedStatement statement = dbConnection.prepareStatement(sqlQuery);
+        statement.setString(1, sensorId);
+        statement.setString(2, request.description);
+        statement.setString(3, request.metricType.toString());
+        statement.setString(4, request.measure.toString());
+        statement.setInt(5, request.userId);
+        statement.setInt(6, request.interval);
+        statement.setInt(7, request.windowSize);
+        return new Query(statement);
+    }
+
+    public Query metricsQuery(String sensorId) throws SQLException {
+        String sqlQuery = " SELECT * FROM " + DatabaseTables.METRICS_TABLE +
+            " WHERE " + METRICS.sensorId + " = ? ";
+
+        PreparedStatement statement = dbConnection.prepareStatement(sqlQuery);
+        statement.setString(1, sensorId);
+        return new Query(statement);
+    }
+
+    public Query deleteMetricQuery(String sensorId, int metricId) throws SQLException {
+        String sqlQuery = "DELETE FROM " + DatabaseTables.METRICS_TABLE +
+                        " WHERE " + METRICS.id + " = ?" +
+                        " AND " +  METRICS.sensorId + " = ? ";
+
+        PreparedStatement statement = dbConnection.prepareStatement(sqlQuery);
+        statement.setInt(1, metricId);
+        statement.setString(2, sensorId);
         return new Query(statement);
     }
 }

@@ -36,6 +36,11 @@ public class Database {
         return query.getStatement().executeQuery();
     }
 
+    public int executeUpdate(Query query) throws SQLException {
+        connect();
+        return query.getStatement().executeUpdate();
+    }
+
     public QueryFactory queryFactory() {
         return queryFactory;
     }

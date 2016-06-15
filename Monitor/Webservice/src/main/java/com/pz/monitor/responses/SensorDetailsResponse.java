@@ -31,7 +31,7 @@ public class SensorDetailsResponse {
             this.hostName= resultSet.getString("hostname");
             this.Dns = resultSet.getString("dns");
             this.CreatedOn = resultSet.getString("createdOn");
-            this.memorySize = new Random().nextInt();
+            this.memorySize = Math.abs(new Random().nextInt());
         } else {
             throw new IllegalArgumentException("Invalid sensorId");
         }

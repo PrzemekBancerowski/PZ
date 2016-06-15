@@ -61,6 +61,28 @@ public class DatabaseTables {
         }
     }
 
+    public static final String METRICS_TABLE= "METRICS_TABLE";
+    public enum METRICS {
+        id("id"),
+        sensorId("sensorId"),
+        description("description"),
+        metricType("metricType"),
+        measure("measure"),
+        userId("userId"),
+        interval("interval"),
+        windowSize("windowSize");
+
+        private String text;
+        METRICS(String value) {
+            text = value;
+        }
+
+        @Override
+        public String toString() {
+            return text;
+        }
+    }
+
     public static Map<String, SENSOR_DETAILS> measurementMapper = new HashMap<>();
     static {
         measurementMapper.put("CPU", SENSOR_DETAILS.cpu_value);

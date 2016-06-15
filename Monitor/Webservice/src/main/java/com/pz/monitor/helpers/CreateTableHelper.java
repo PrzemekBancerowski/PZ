@@ -37,13 +37,30 @@ public class CreateTableHelper {
                 SENSOR_METADATA.architecture + " text,\n "+
                 SENSOR_METADATA.cpu_model + "   text,\n "+
                 SENSOR_METADATA.cpu_vendor + "  text,\n "+
-                SENSOR_METADATA.cpu_cores + "   text,\n "+
+                SENSOR_METADATA.cpu_cores + "   integer,\n "+
                 SENSOR_METADATA.cpu_cache + "   text,\n "+
                 SENSOR_METADATA.hostname + "    text,\n "+
                 SENSOR_METADATA.dns + "         text,\n "+
                 SENSOR_METADATA.createdOn + "    bigint\n "+
                 ");\n";
 
-        return createSensorTable + createMetadataTable;
+            final String createMetricsTable =
+                "DROP TABLE " + DatabaseTables.METRICS_TABLE+ ";\n " +
+                "CREATE TABLE "+ DatabaseTables.METRICS_TABLE+ " (\n "+
+                DatabaseTables.METRICS.id + "           serial primary key,\n "+
+                DatabaseTables.METRICS.sensorId + "     text,\n "+
+                DatabaseTables.METRICS.description + "  text,\n "+
+                DatabaseTables.METRICS.metricType + "   text,\n "+
+                DatabaseTables.METRICS.measure + "      text,\n "+
+                DatabaseTables.METRICS.userId + "       integer,\n "+
+                DatabaseTables.METRICS.interval + "     integer,\n "+
+                DatabaseTables.METRICS.windowSize + "   integer\n "+
+                ");\n";
+
+        final String insertSensor = "INSERT INTO " + DatabaseTables.SENSOR_METADATA_TABLE +
+            " (id, sensorId, name, vendor, version, architecture, cpu_model, cpu_vendor, cpu_cores, cpu_cache, hostname, dns, createdOn )\n " +
+            " values (1, 'sensor1' ,'sensor name', 'vendor1', 'v1', 'arch1', 'model1', 'vendorcpu', 3, 'cache', 'host1', 'dsfs', 1231231);\n";
+
+        return createSensorTable + createMetadataTable + createMetricsTable + insertSensor;
     }
 }

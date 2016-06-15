@@ -3,6 +3,7 @@ package com.pz.monitor.controllers;
 import com.pz.monitor.database.Query;
 import com.pz.monitor.requests.MetricRequest;
 import com.pz.monitor.responses.MetricResponse;
+import com.pz.monitor.responses.MetricsResponse;
 import com.pz.monitor.responses.SensorDetailsResponse;
 import com.pz.monitor.responses.SensorsResponse;
 
@@ -38,11 +39,11 @@ public class Sensors extends Base {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getSensorMetrics(@PathParam("sensorId") String sensorId) {
         try {
-            List<MetricResponse> metricResponses = new ArrayList<>();
-            for (int i=0; i<10; i++) {
-                metricResponses.add( new MetricResponse());
-            }
-            String jsonResult = mapper.writeValueAsString(metricResponses);
+            Query query = db.queryFactory().metricsQuery(sensorId);
+            ResultSet resultSet = db.execute(query);
+            MetricsResponse response = new MetricsResponse(resultSet);
+
+            String jsonResult = mapper.writeValueAsString(response.getResponse());
             return Response.ok(jsonResult, MediaType.APPLICATION_JSON).build();
 
         } catch (Exception ex) {
@@ -54,11 +55,17 @@ public class Sensors extends Base {
     @Path("{sensorId}/metrics")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response postSensorMetrics(MetricRequest request) {
+    public Response postSensorMetrics(MetricRequest request, @PathParam("sensorId") String sensorId) {
         try {
-            MetricResponse response = new MetricResponse(request);
-            String result = mapper.writeValueAsString(response);
-            return Response.ok(result, MediaType.TEXT_PLAIN).build();
+            request.validate();
+            request.reassignValues();
+
+            Query query = db.queryFactory().createMetrics(request, sensorId);
+            ResultSet result = db.execute(query);
+            MetricResponse response = new MetricResponse(request, result);
+
+            String jsonResult = mapper.writeValueAsString(response);
+            return Response.ok(jsonResult, MediaType.APPLICATION_JSON).build();
 
         } catch (Exception ex) {
             return Response.status(Response.Status.BAD_REQUEST).entity(ex.getMessage()).build();
@@ -68,9 +75,12 @@ public class Sensors extends Base {
     @GET
     @Path("{sensorId}/metrics/{metricId}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getMetric() {
+    public Response getMetric(@PathParam("sensorId") String sensorId, @PathParam("metricId") int metricId) {
         try {
-            MetricResponse response = new MetricResponse();
+            Query query = db.queryFactory().metricsQuery(sensorId, metricId);
+            ResultSet resultSet = db.execute(query);
+            MetricResponse response = new MetricResponse(resultSet);
+
             String jsonResult = mapper.writeValueAsString(response);
             return Response.ok(jsonResult, MediaType.APPLICATION_JSON).build();
 
@@ -82,8 +92,10 @@ public class Sensors extends Base {
     @DELETE
     @Path("{sensorId}/metrics/{metricId}")
     @Produces(MediaType.TEXT_PLAIN)
-    public Response postMetric(@PathParam("sensorId") String sensorId, @PathParam("metricId") String metricId) {
+    public Response postMetric(@PathParam("sensorId") String sensorId, @PathParam("metricId") int metricId) {
         try {
+            Query query = db.queryFactory().deleteMetricQuery(sensorId, metricId);
+            db.executeUpdate(query);
             return Response.ok("Deleted "+ sensorId + " sensor's " + metricId + " metric", MediaType.TEXT_PLAIN).build();
         } catch (Exception ex) {
             return Response.status(Response.Status.BAD_REQUEST).entity(ex.getMessage()).build();
