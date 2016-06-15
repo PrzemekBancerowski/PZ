@@ -57,8 +57,14 @@
                     <div class="col-md-5 my-multiselect">
                         <label><b>Dostępne metryki:</b></label>
                         <select multiple class="form-control my-list" id="sel3" onchange="changeFunc2()"></select>
-                        <button type="button" class="btn" onclick="currMetric()">Aktualne</button>
-                        <button type="button" class="btn" onclick="archMetric()">Archiwalne</button>
+                        <div class="btn-group" data-toggle="buttons">
+                            <label class="btn btn-primary active">
+                                <input type="radio" name="measureType" id="liveMeasuresButton" checked>Aktualne
+                            </label>
+                            <label class="btn btn-primary">
+                                <input type="radio" name="measureType" id="archiveMeasuresButton">Archiwalne
+                            </label>
+                        </div>
                         <button type="button" class="btn" onclick="addMetric()" id="addMetricBtn">Dodaj metrykę</button>
                         <button type="button" class="btn" onclick="delMetric()" id="delMetricBtn">Usuń metrykę</button>
                     </div>
@@ -89,20 +95,32 @@
                 <div class="tab-pane active my-tab" id="my-tab-1">
                     <div class="row">
                         <form>
-                            <div class="col-md-4">
+                        	<div class="col-md-4">
                                 </br>
-                                <div class="form-group">
-                                    <input type="number" class="form-control my-form-field" id="IleOstatnich" placeholder="ilość ostatnich pomiarów">
+                                
+                                <div id="liveMeasures">
+                                	<div class="form-group">
+                                        <label for="interwal">Interwał czasowy [s]</label>
+                                        <input type="number" class="form-control my-form-field" id="interwal" value="5">
+                                    </div>
                                 </div>
-                                <div class="form-group">
-                                    <input type="" class="form-control my-form-field date-picker" id="OdKiedy" placeholder="Od kiedy">
-                                </div>
-                                <div class="form-group">
-                                    <input type="" class="form-control my-form-field date-picker" id="DoKiedy" placeholder="Do kiedy">
+                                <div id="archiveMeasures">
+                                    <div class="form-group">
+                                        <label for="ileOstatnich">Limit pomiarów</label>
+                                        <input type="number" class="form-control my-form-field" id="ileOstatnich" value="10">
+                                    </div>
+                                    <div class="form-group">
+                                    	<label for="odKiedy">Od</label>
+                                        <input type="" class="form-control my-form-field date-picker" id="odKiedy">
+                                    </div>
+                                    <div class="form-group">
+                                    	<label for="doKiedy">Do</label>
+                                        <input type="" class="form-control my-form-field date-picker" id="doKiedy">
+                                    </div>
                                 </div>
                                 </br>
                                 </br>
-                                <button type="submit" class="btn btn-primary">Pokaż</button>
+                                <button type="button" class="btn btn-primary" onClick="showMeasures()">Pokaż pomiary</button>
                             </div>
                             <div class="col-md-2 checkboxs">
                                 </br>

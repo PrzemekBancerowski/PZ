@@ -18,6 +18,10 @@ $(document).ready(function(){
         }
     });
 
+	//init
+	$("#archiveMeasures").toggle();
+	$("#odKiedy").datepicker("setDate", new Date(new Date - 12096e5));
+	$("#doKiedy").datepicker("setDate", new Date());
     $('#nazwa').keyup(searchFilter);
 });
 
@@ -175,4 +179,32 @@ function searchFilter(){
             }
         }
    };
+}
+
+$('input[name=measureType]').change( function() {
+   $("#archiveMeasures").toggle();
+   $("#liveMeasures").toggle();
+});
+
+function showMeasures() {
+	param = {};
+	param.startTime = new Date($("#odKiedy").val());
+	param.endTime = new Date($("#doKiedy").val());
+	param.maxCount = $("#ileOstatnich").val();
+	
+	if($('#liveMeasuresButton').prop('checked')) {
+		interwal = $("#interwal").val();
+		now = new Date();
+		param.startTime = new Date(now.getTime() - interwal*1000);
+		param.endTime = now;
+		
+		//getting measures in loop...
+	} else {
+		getMeasures(param)
+	}
+	
+}
+
+function getMeasures(param) {
+
 }
