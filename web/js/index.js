@@ -18,6 +18,10 @@ $(document).ready(function(){
         }
     });
 
+	//init
+	$("#archiveMeasures").toggle();
+	$("#odKiedy").datepicker("setDate", new Date(new Date - 12096e5));
+	$("#doKiedy").datepicker("setDate", new Date());
     $('#nazwa').keyup(searchFilter);
 });
 
@@ -37,7 +41,7 @@ function chooseMonitor(){
 }
 
 function getListSensors(){
-    var selectedMonitor = $('#wybierzMonitor').val();
+    selectedMonitor = $('#wybierzMonitor').val();
     $.ajax({
         url: 'http://localhost:7755/monitors/' + selectedMonitor + '/sensors',
         type: "GET",
@@ -56,7 +60,7 @@ function getListSensors(){
 
 
 function getMetrics(sensorId){
-    var selectedMonitor = $('#wybierzMonitor').val();
+   selectedMonitor = $('#wybierzMonitor').val();
    $.ajax({
         url: 'http://localhost:7755/monitors/' + selectedMonitor + '/sensors/' + sensorId + '/metrics',
         type: "GET",
@@ -216,4 +220,44 @@ function searchFilter(){
 
 function ErrorFunction(){
     console.log("cos poslo nie tak");
+}
+$('input[name=measureType]').change( function() {
+   $("#archiveMeasures").toggle();
+   $("#liveMeasures").toggle();
+});
+
+function showMeasures() {
+	param = {};
+	param.startTime = new Date($("#odKiedy").val());
+	param.endTime = new Date($("#doKiedy").val());
+	//param.maxCount = $("#ileOstatnich").val();
+	
+	if($('#liveMeasuresButton').prop('checked')) {
+		czestotliwosc = $("#czestotliwosc").val();
+		now = new Date();
+		param.startTime = new Date(now.getTime() - czestotliwosc*1000);
+		param.endTime = now;
+		
+		//getting measures in loop...
+	} else {
+		getSimpleMeasures(param);
+	}
+	
+}
+
+function getSimpleMeasures(param) {
+	$.ajax({
+        url: 'http://localhost:7755/monitors/' + selectedMonitor + "/sensors/" + sensorId + "/metrics/" + metricId + "/measurements",
+        type: "GET",
+        dataType: "json",
+		data: {fromDate: param.startTime.getTime(), toDate: param.endTime.getTime()},
+        async:false,
+        success: function(data) {
+        	
+        },
+        error: function () {
+        	ErrorFunction();
+        }
+
+    });
 }
