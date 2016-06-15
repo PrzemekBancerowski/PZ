@@ -151,7 +151,7 @@ function delMetric(){
         dataType: "json",
         async:false,
         success: function () {
-            addMetricsToList(tableMetrics);
+            getMetrics(sensorId);
         },
         error: function () {
             ErrorFunction();
@@ -202,7 +202,7 @@ function zapiszMetryke(){
     }
 }
 function anulujMetryke(){
-    $("#dodajMetryke").fadeOut();
+    $("#dodajMetryke").fadeOut(200);
 }
 function searchFilter(){
 	var listOfSensors = document.getElementById("sel2");
@@ -234,7 +234,9 @@ $('input[name=measureType]').change( function() {
 });
 
 function wykresBtn(){
-    $("#dodajMetryke").fadeOut(200);
+    $("#dodajMetryke").fadeOut(200,function(){
+        $($("#opcjeWykresow").fadeIn(200));
+    });
 }
 function showMeasures() {
 	param = {};
@@ -260,10 +262,9 @@ function liveMeasuresFun(param) {
 
 function getSimpleMeasures(param) {
 	$.ajax({
-        url: 'http://localhost:7755/monitors/' + selectedMonitor + "/sensors/" + sensorId + "/metrics/" + metricId + "/measurements",
+        url: 'http://localhost:7755/monitors/' + selectedMonitor + "/sensors/" + sensorId + "/metrics/" + metricId + "/measurements?fromTime="+param.startTime.getTime()+"&toTime="+param.endTime.getTime(),
         type: "GET",
         dataType: "json",
-		data: {fromDate: param.startTime.getTime(), toDate: param.endTime.getTime()},
         async:false,
         success: function(data) {
         	
