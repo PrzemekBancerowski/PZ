@@ -3,6 +3,7 @@ var tableMetrics = [];
 var selectedMonitor = null;
 var sensorId = null;
 var metricId = null;
+var intervalHandler = null;
 
 $(document).ready(function(){
 	$.ajax({
@@ -242,19 +243,22 @@ function showMeasures() {
 	param = {};
 	param.startTime = new Date($("#odKiedy").val());
 	param.endTime = new Date($("#doKiedy").val());
-	//param.maxCount = $("#ileOstatnich").val();
 	
 	if($('#liveMeasuresButton').prop('checked')) {
-		czestotliwosc = $("#czestotliwosc").val();
-		now = new Date();
-		param.startTime = new Date(now.getTime() - czestotliwosc*1000);
-		param.endTime = now;
-		
-		//getting measures in loop...
+		param.czestotliwosc = $("#czestotliwosc").val();
+		$('#stopLoopBtn').attr("disabled", false);
+		intervalHandler = setInterval(liveMeasuresFun, param.czestotliwosc*1000, param);
 	} else {
 		getSimpleMeasures(param);
 	}
 	
+}
+
+function liveMeasuresFun(param) {
+	now = new Date();
+	param.startTime = new Date(now.getTime() - param.czestotliwosc*1000);
+	param.endTime = now;
+	getSimpleMeasures(param);
 }
 
 function getSimpleMeasures(param) {
@@ -272,4 +276,9 @@ function getSimpleMeasures(param) {
         }
 
     });
+}
+
+function stopLoop() {
+	window.clearInterval(intervalHandler);
+	$('#stopLoopBtn').attr("disabled", true);
 }
