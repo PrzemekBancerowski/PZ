@@ -1,6 +1,7 @@
 html,
 body {
     height: 100%;
+    background-color: #446CB3 !important;
 }
 
 body {
@@ -54,6 +55,15 @@ body {
 
 .warning{
     padding-top: 15px;
+}
+
+.white{
+    color: white !important;
+}
+
+.formLabel{
+    height: 100%;
+    line-height: 100%;
 }
 
 #hostsData{
