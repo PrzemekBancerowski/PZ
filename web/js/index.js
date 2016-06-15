@@ -172,11 +172,18 @@ function addMetric(){
     });
     select = document.getElementById("pomiarSel");
     $(select).html("");
+    //zmieniam w js a nie w html,żeby nie robić zbyt dużęgo bałaganu
+
+    select.options[0] = new Option("CPU",0);
+    select.options[1] = new Option("MEMORY",1);
+    select.options[2] = new Option("NETWORK",2);
+    /*
     for(metric in tableMetrics){
         if(tableMetrics[metric].metricType != "COMPLEX") {
             select.options[select.options.length] = new Option(tableMetrics[metric].description + " ("+tableMetrics[metric].measure+")",metric);
         }
     }
+    */
 }
 
 function zapiszMetryke(){
@@ -188,7 +195,7 @@ function zapiszMetryke(){
     data.interval = interv;
     data.windowSize = wind;
     data.description = name;
-    data.measure = tableMetrics[met].measure;
+    data.measure = $("#pomiarSel option:selected").html();
     data.metricType = "COMPLEX";
     data.userId = 0; //userID!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     d = JSON.stringify(data);
