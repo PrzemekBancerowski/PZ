@@ -105,6 +105,7 @@ function changeFunc() {
 
     $("#daneSensora").fadeIn();
     $("#metryki").fadeIn();
+	$("#opcjeWykresow").fadeIn();
 
     var tab = $("#daneSensoraTab");
     tab.html("<tr><td colspan='2'><b>Metadane</b></td></tr>");
@@ -233,9 +234,7 @@ $('input[name=measureType]').change( function() {
 });
 
 function wykresBtn(){
-    $("#dodajMetryke").fadeOut(200,function(){
-        $("#opcjeWykresow").fadeIn();
-    });
+    $("#dodajMetryke").fadeOut(200);
 }
 function showMeasures() {
 	param = {};
