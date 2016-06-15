@@ -71,4 +71,7 @@ body {
 #opcjeWykresow{
     display:none;
 }
-
+.form_datetime > .setHeight{
+    display: inline-block;
+    height: 30px;
+}
