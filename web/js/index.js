@@ -27,7 +27,7 @@ function enableButton() {
 
 function chooseMonitor(){
 	id = $('#wybierzMonitor').val();
-	
+	selectedMonitor = id;
 	if(id != null) {
         getListSensors();
         $("#hostsData").fadeIn();
@@ -138,7 +138,6 @@ function changeFunc2(){
     else{
         $("#delMetricBtn").attr("disabled", true);
     }
-    $("#daneMetryki").fadeIn();
 }
 
 function delMetric(){
@@ -155,6 +154,44 @@ function delMetric(){
         }
 
     });
+}
+function addMetric(){
+    $("#dodajMetryke").fadeIn();
+    select = document.getElementById("pomiarSel");
+    for(metric in tableMetrics){
+        if(tableMetrics[metric].metricType != "COMPLEX") {
+            select.options[select.options.length] = new Option(tableMetrics[metric].description + " ("+tableMetrics[metric].measure+")",metric);
+        }
+    }
+}
+
+function zapiszMetryke(){
+    var interv = $("#interwalInp").val();
+    var wind = $("#oknoInp").val();
+    var met = $("#pomiarSel").val();
+    var name = $("#nazwaMetryki").val();
+    data = {};
+    data.interval = interv;
+    data.windowSize = wind;
+    data.description = name;
+    data.measure = tableMetrics[met].measure;
+    d = JSON.stringify(data);
+    if(interv>0 && wind > 0 && met > 0){
+        $.ajax({
+            url: 'http://localhost:7755/monitors/' +selectedMonitor +"/sensors/"+sensorId+"/metrics",
+            type: "POST",
+            data: d,
+            dataType: "json",
+            async:false,
+            success: function(){
+                getMetrics(sensorId);
+                $("#dodajMetryke").fadeOut();
+            },
+            error: function(){
+                ErrorFunction();
+            }
+        })
+    }
 }
 function searchFilter(){
 	var listOfSensors = document.getElementById("sel2");
@@ -175,4 +212,8 @@ function searchFilter(){
             }
         }
    };
+}
+
+function ErrorFunction(){
+    console.log("cos poslo nie tak");
 }

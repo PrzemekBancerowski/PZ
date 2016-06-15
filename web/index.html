@@ -39,34 +39,43 @@
                 </form>
             </div>
             <div id="hostsData">
-                <div class="col-md-5 my-multiselect">
-                    <label><b>Dostępne hosty:</b></label>
-                    <div class="form-group">
-                        <input type="text" class="form-control" id="nazwa" placeholder="Szukaj...">
-                    </div>
-                    <select multiple class="form-control my-list" id="sel2" onchange="changeFunc()">
-
-                    </select>
-                </div>
-                <div class="container row" id="daneSensora">
-                    <table id="daneSensoraTab">
-
-                    </table>
-                </div>
-                <div class="container row"  id="metryki">
+                <div>
                     <div class="col-md-5 my-multiselect">
-                        <label><b>Dostępne metryki:</b></label>
-                        <select multiple class="form-control my-list" id="sel3" onchange="changeFunc2()"></select>
-                        <button type="button" class="btn" onclick="currMetric()">Aktualne</button>
-                        <button type="button" class="btn" onclick="archMetric()">Archiwalne</button>
-                        <button type="button" class="btn" onclick="addMetric()" id="addMetricBtn">Dodaj metrykę</button>
-                        <button type="button" class="btn" onclick="delMetric()" id="delMetricBtn">Usuń metrykę</button>
+                        <label><b>Dostępne hosty:</b></label>
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="nazwa" placeholder="Szukaj...">
+                        </div>
+                        <select multiple class="form-control my-list" id="sel2" onchange="changeFunc()">
+
+                        </select>
+                    </div>
+                    <div class="container row" id="daneSensora">
+                        <table id="daneSensoraTab">
+
+                        </table>
                     </div>
                 </div>
-                <div id="daneMetryki">
-                    <table id="daneMetrykiTab">
-
-                    </table>
+                <div>
+                    <div class="container row"  id="metryki">
+                        <div class="col-md-5 my-multiselect">
+                            <label><b>Dostępne metryki:</b></label>
+                            <select multiple class="form-control my-list" id="sel3" onchange="changeFunc2()"></select>
+                            <button type="button" class="btn" onclick="currMetric()">Aktualne</button>
+                            <button type="button" class="btn" onclick="archMetric()">Archiwalne</button>
+                            <button type="button" class="btn" onclick="addMetric()" id="addMetricBtn">Dodaj metrykę</button>
+                            <button type="button" class="btn" onclick="delMetric()" id="delMetricBtn">Usuń metrykę</button>
+                        </div>
+                    </div>
+                    <div class="container row" id="dodajMetryke">
+                        <form id="dodajMetrykeForm">
+                            <label><b>Dodaj nową metrykę</b></label></form><br/>
+                            <label>Nazwa:</label><input type="text" id="nazwaMetryki"/><br/>
+                            <label>Pomiar:</label><select id="pomiarSel"></select><br/>
+                            <label>Interwał:</label><input type="number" id="interwalInp"/><br/>
+                            <label>Okno czasowe:</label><input type="number" id="oknoInp"/><br/>
+                            <button type="button"class="btn btn-primary" onclick="zapiszMetryke()">Zapisz</button>
+                        </form>
+                    </div>
                 </div>
             </div>
 
