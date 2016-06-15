@@ -19,11 +19,11 @@ public class Application {
         ApplicationContext ctx = SpringApplication.run(Application.class, args);
         System.out.println("### Application works ###");
 
-        if (args.length > 1 && "sender".equals(args[1])) {
+     //   if (args.length > 1 && "sender".equals(args[1])) {
             System.out.println("### Starting sending UDP packets ###");
             Thread t = new Thread(ctx.getBean(UdpSender.class));
             t.start();
-        }
+      //  }
     }
 
 }

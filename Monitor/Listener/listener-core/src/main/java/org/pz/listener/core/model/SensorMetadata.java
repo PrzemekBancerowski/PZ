@@ -29,7 +29,7 @@ public class SensorMetadata implements Serializable {
     private String architecture;
     private String cpu_model;
     private String cpu_vendor;
-    private String cpu_cores;
+    private Integer cpu_cores;
     private String cpu_cache;
     private String hostname;
     private String dns;
@@ -47,7 +47,7 @@ public class SensorMetadata implements Serializable {
 
         cpu_model = (String) cpu.get("model");
         cpu_vendor = (String) cpu.get("vendor");
-        cpu_cores = (String) cpu.get("vendor");
+        cpu_cores = (Integer) cpu.get("total_cores");
         cpu_cache = Integer.toString((Integer) cpu.get("cache_size"));
 
         hostname = (String) netIf.get("host_name");
@@ -125,11 +125,11 @@ public class SensorMetadata implements Serializable {
         this.cpu_vendor = cpu_vendor;
     }
 
-    public String getCpu_cores() {
+    public Integer getCpu_cores() {
         return cpu_cores;
     }
 
-    public void setCpu_cores(String cpu_cores) {
+    public void setCpu_cores(Integer cpu_cores) {
         this.cpu_cores = cpu_cores;
     }
 
