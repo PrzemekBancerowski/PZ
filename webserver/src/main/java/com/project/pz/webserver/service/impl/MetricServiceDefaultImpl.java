@@ -97,6 +97,8 @@ public class MetricServiceDefaultImpl implements MetricService {
     @Override
     public MetricModel addMetric(String monitorId, String sensorId, MetricModel metric) throws MonitorNotFoundException, JsonProcessingException {
 
+        metric.setUserId(userService.currentUser().getId());
+
         RestTemplate restTemplate = new RestTemplate();
         MonitorModel monitor = monitorService.getMonitorForId(monitorId);
 
