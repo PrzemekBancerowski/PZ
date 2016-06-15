@@ -22,7 +22,7 @@ public class MeasurementServiceDefaultImpl implements MeasurementService {
     private MonitorService monitorService;
 
     @Override
-    public List<BigDecimal> getMeasurements(String monitorId, String sensorId, String metricId, LocalDateTime fromDate, LocalDateTime toDate) {
+    public List<BigDecimal> getMeasurements(String monitorId, String sensorId, String metricId, Long fromTime, Long toTime) {
         return mockMeasurements();
     }
 

@@ -81,7 +81,7 @@ public class ControllerExecutionMonitor {
         StringBuilder builder = new StringBuilder();
         Object[] args = joinPoint.getArgs();
         for (Object arg : args) {
-            builder.append(arg.toString()).append(",");
+            builder.append(arg == null ? "null" : arg.toString()).append(",");
         }
         if (args.length > 0) {
             builder.deleteCharAt(builder.length() - 1);
