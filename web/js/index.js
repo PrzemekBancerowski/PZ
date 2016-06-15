@@ -160,8 +160,11 @@ function delMetric(){
     });
 }
 function addMetric(){
-    $("#dodajMetryke").fadeIn();
+    $("#opcjeWykresow").fadeOut(200,function(){
+        $("#dodajMetryke").fadeIn();
+    });
     select = document.getElementById("pomiarSel");
+    $(select).html("");
     for(metric in tableMetrics){
         if(tableMetrics[metric].metricType != "COMPLEX") {
             select.options[select.options.length] = new Option(tableMetrics[metric].description + " ("+tableMetrics[metric].measure+")",metric);
@@ -179,6 +182,7 @@ function zapiszMetryke(){
     data.windowSize = wind;
     data.description = name;
     data.measure = tableMetrics[met].measure;
+    data.userId = 0; //userID!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     d = JSON.stringify(data);
     if(interv>0 && wind > 0 && met > 0){
         $.ajax({
@@ -196,6 +200,9 @@ function zapiszMetryke(){
             }
         })
     }
+}
+function anulujMetryke(){
+    $("#dodajMetryke").fadeOut();
 }
 function searchFilter(){
 	var listOfSensors = document.getElementById("sel2");
@@ -226,6 +233,11 @@ $('input[name=measureType]').change( function() {
    $("#liveMeasures").toggle();
 });
 
+function wykresBtn(){
+    $("#dodajMetryke").fadeOut(200,function(){
+        $("#opcjeWykresow").fadeIn();
+    });
+}
 function showMeasures() {
 	param = {};
 	param.startTime = new Date($("#odKiedy").val());

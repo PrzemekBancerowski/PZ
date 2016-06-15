@@ -60,7 +60,7 @@
                         <div class="col-md-5 my-multiselect">
                             <label><b>Dostępne metryki:</b></label>
                             <select multiple class="form-control my-list" id="sel3" onchange="changeFunc2()"></select>
-                        <div class="btn-group" data-toggle="buttons">
+                        <div class="btn-group" data-toggle="buttons" onclick="wykresBtn()">
                             <label class="btn btn-primary active">
                                 <input type="radio" name="measureType" id="liveMeasuresButton" checked>Aktualne
                             </label>
@@ -80,7 +80,34 @@
                             <label>Interwał:</label><input type="number" id="interwalInp"/><br/>
                             <label>Okno czasowe:</label><input type="number" id="oknoInp"/><br/>
                             <button type="button"class="btn btn-primary" onclick="zapiszMetryke()">Zapisz</button>
+                            <button type="button" class="btn" onclick="anulujMetryke()">Anuluj</button>
                         </form>
+                    </div>
+                    <div id="opcjeWykresow">
+                        <div class="col-md-4">
+                            <br/>
+                            <div id="liveMeasures">
+                                <div class="form-group">
+                                    <label for="czestotliwosc">Częstotliwość odświeżania [s]</label>
+                                    <input type="number" class="form-control my-form-field" id="czestotliwosc" value="5">
+                                </div>
+                            </div>
+                            <div id="archiveMeasures">
+                                <!--<div class="form-group">
+                                    <label for="ileOstatnich">Limit pomiarów</label>
+                                    <input type="number" class="form-control my-form-field" id="ileOstatnich" value="10">
+                                </div>-->
+                                <div class="form-group">
+                                    <label for="odKiedy">Od</label>
+                                    <input type="" class="form-control my-form-field date-picker" id="odKiedy">
+                                </div>
+                                <div class="form-group">
+                                    <label for="doKiedy">Do</label>
+                                    <input type="" class="form-control my-form-field date-picker" id="doKiedy">
+                                </div>
+                            </div>
+                            <button type="button" class="btn btn-primary" onClick="showMeasures()">Pokaż pomiary</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -88,69 +115,6 @@
         </div>
 
 
-
-    
-
-
-
-        <div class="inner inner2">
-        <!-- Zakładki -->
-            <ul class="nav nav-tabs" role="tablist">
-                <li class="active"><a href="#my-tab-1" role="tab" data-toggle="tab">Pomiary proste</a></li>
-                <li><a href="#my-tab-2" role="tab" data-toggle="tab">Pomiary zlozone</a></li>
-            </ul>
-        <!-- Zawartość zakładek -->
-            <div class="tab-content">
-                <div class="tab-pane active my-tab" id="my-tab-1">
-                    <div class="row">
-                        <form>
-                        	<div class="col-md-4">
-                                </br>
-                                
-                                <div id="liveMeasures">
-                                	<div class="form-group">
-                                        <label for="czestotliwosc">Częstotliwość odświeżania [s]</label>
-                                        <input type="number" class="form-control my-form-field" id="czestotliwosc" value="5">
-                                    </div>
-                                </div>
-                                <div id="archiveMeasures">
-                                    <!--<div class="form-group">
-                                        <label for="ileOstatnich">Limit pomiarów</label>
-                                        <input type="number" class="form-control my-form-field" id="ileOstatnich" value="10">
-                                    </div>-->
-                                    <div class="form-group">
-                                    	<label for="odKiedy">Od</label>
-                                        <input type="" class="form-control my-form-field date-picker" id="odKiedy">
-                                    </div>
-                                    <div class="form-group">
-                                    	<label for="doKiedy">Do</label>
-                                        <input type="" class="form-control my-form-field date-picker" id="doKiedy">
-                                    </div>
-                                </div>
-                                </br>
-                                </br>
-                                <button type="button" class="btn btn-primary" onClick="showMeasures()">Pokaż pomiary</button>
-                            </div>
-                            <div class="col-md-2 checkboxs">
-                                </br>
-                                <div class="checkbox">
-                                    <label><input type="checkbox" value="">CPU</label>
-                                </div>
-                                <div class="checkbox">
-                                    <label><input type="checkbox" value="">MEM</label>
-                                </div>
-                                <div class="checkbox">
-                                    <label><input type="checkbox" value="">HDD</label>
-                                </div>
-                            </div>
-
-                        </form>
-                    </div>
-                </div>
-                <div class="tab-pane my-tab" id="my-tab-2">Tu będą pomiary złożone</div>
-                </div>
-            </div>
-        
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
         <script src="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.js"></script>
