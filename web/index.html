@@ -75,13 +75,36 @@
                             <button type="button" class="btn" onclick="delMetric()" id="delMetricBtn">Usuń metrykę</button>
                         </div>
                     </div>
-                    <div class="container row" id="dodajMetryke">
-                        <form id="dodajMetrykeForm">
-                            <label><b>Dodaj nową metrykę</b></label></form><br/>
-                            <label>Nazwa:</label><input type="text" id="nazwaMetryki"/><br/>
-                            <label>Pomiar:</label><select id="pomiarSel"></select><br/>
-                            <label>Interwał:</label><input type="number" id="interwalInp"/><br/>
-                            <label>Okno czasowe:</label><input type="number" id="oknoInp"/><br/>
+                     <div class="container row form-horizontal" id="dodajMetryke">
+                        <form id="dodajMetrykeForm" role="form">
+                        	<div class = "form-group">
+                        		<label class="col-xs-2"><b><br/><br/>Dodaj nową metrykę</b></label></form><br/>
+                        	</div>
+                            
+                            <div class="form-group">
+                            	<label class ="col-xs-1">Nazwa:</label>
+                            	<div class="col-xs-2">
+                            		<input type="text" id="nazwaMetryki"/><br/>
+                            	</div>
+                            </div>
+                            <div class="form-group">
+                            	<label class="col-xs-1">Pomiar:</label>
+                            	<div class="col-xs-2">
+                            		<select id="pomiarSel"></select><br/>
+                            	</div>
+                            </div>
+                            <div class="form-group">
+                            	<label class ="col-xs-1">Interwał:</label>
+                            	<div class="col-xs-2">
+                            		<input type="number" id="interwalInp"/><br/>
+                            	</div>
+                            </div>
+                            <div class="form-group">
+                            	<label class="col-xs-1">Okno czasowe:</label>
+                            	<div class="col-xs-2">
+                            		<input type="number" id="oknoInp"/><br/>
+                            	</div>
+                            </div>
                             <button type="button"class="btn btn-primary" onclick="zapiszMetryke()">Zapisz</button>
                             <button type="button" class="btn" onclick="anulujMetryke()">Anuluj</button>
                         </form>
