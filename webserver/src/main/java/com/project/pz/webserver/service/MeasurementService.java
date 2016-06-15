@@ -10,6 +10,6 @@ import java.util.List;
  */
 public interface MeasurementService {
 
-    List<BigDecimal> getMeasurements(String monitorId, String sensorId, String metricId, LocalDateTime fromDate, LocalDateTime toDate);
+    List<BigDecimal> getMeasurements(String monitorId, String sensorId, String metricId, Long fromTime, Long toTime);
 
 }
