@@ -109,7 +109,7 @@
                             <button type="button" class="btn" onclick="anulujMetryke()">Anuluj</button>
                         </form>
                     </div>
-                    <div id="opcjeWykresow">
+                   <div id="opcjeWykresow" class="container row form-horizontal">
                         <div class="col-md-4">
                             <br/>
                             <div id="liveMeasures">
@@ -120,24 +120,34 @@
                             </div>
                             <div id="archiveMeasures">
                                 <div class="form-group">
-                                    <label for="odKiedy">Od</label>
-                                    <div class="controls input-append date form_datetime" id="odKiedy" data-date="2016-05-16T05:25:07Z" data-date-format="dd MM yyyy - HH:ii p" data-link-field="dtp_input1">
-                    					<input class ="setHeight" size="30" type="text" value="" readonly>
-					                    <span class="setHeight add-on"><i class="icon-remove"></i></span>
-					                    <span class="setHeight add-on"><i class="icon-th"></i></span>
+                                	<div class="row">
+                                    	<label for="odKiedy" class="col-xs-1 row"><br/>Od:</label>
+                                    </div>
+                                    <div class="row">
+	                                    <div class="controls input-append date form_datetime col-xs-1" id="odKiedy" data-date="2016-05-16T05:25:07Z" data-date-format="dd MM yyyy - HH:ii p" data-link-field="dtp_input1">
+	                    					<input class ="setHeight" size="30" type="text" value="" readonly>
+						                    <span class="setHeight add-on"><i class="icon-remove"></i></span>
+						                    <span class="setHeight add-on"><i class="icon-th"></i></span>
+						                </div>
 					                </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="doKiedy">Do</label>
-                                    <div class="controls input-append date form_datetime" id="doKiedy" data-date="2016-05-16T05:25:07Z" data-date-format="dd MM yyyy - HH:ii p" data-link-field="dtp_input1">
-                    					<input class ="setHeight" size="30" type="text" value="" readonly>
-					                    <span class="setHeight add-on"><i class="icon-remove"></i></span>
-					                    <span class="setHeight add-on"><i class="icon-th"></i></span>
+                                	<div class="row">
+                                		<div class="row">
+	                                    	<label for="doKiedy" class="col-xs-1">Do:</label>
+	                                    </div>
+	                                    <div class="controls input-append date form_datetime col-xs-2" id="doKiedy" data-date="2016-05-16T05:25:07Z" data-date-format="dd MM yyyy - HH:ii p" data-link-field="dtp_input1">
+	                    					<input class ="setHeight" size="30" type="text" value="" readonly>
+						                    <span class="setHeight add-on"><i class="icon-remove"></i></span>
+						                    <span class="setHeight add-on"><i class="icon-th"></i></span>
+						                </div>
 					                </div>
-                                </div>
+                               	 </div>
                             </div>
-                            <button type="button" class="btn btn-primary" onClick="showMeasures()">Pokaż pomiary</button>
-                            <button type="button" class="btn" id="stopLoopBtn" onClick="stopLoop()" disabled>Zatrzymaj</button>
+                            <div class="col-xs-1">
+	                            <button type="button" class="btn btn-primary" onClick="showMeasures()">Pokaż pomiary</button>
+                            </div>
+                            <button type="button" class="btn btn-primary" id="stopLoopBtn" onClick="stopLoop()" disabled>Zatrzymaj</button>
                         </div>
                     </div>
                 </div>
