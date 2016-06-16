@@ -96,17 +96,18 @@ public class UserControllerTest extends AbstractMvcTest {
                 .andDo(print())
                 .andReturn();
 
-        mockMvc.perform(post("/users/login")
-                .content(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(userModel))
-                .contentType(MediaType.APPLICATION_JSON_UTF8))
-                .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
-                .andExpect(content().encoding(EXPECTED_ENCODING))
-                .andDo(print())
-                .andReturn();
+//        mockMvc.perform(post("/users/login")
+//                .content(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(userModel))
+//                .contentType(MediaType.APPLICATION_JSON_UTF8))
+//                .andExpect(status().isOk())
+//                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
+//                .andExpect(content().encoding(EXPECTED_ENCODING))
+//                .andDo(print())
+//                .andReturn();
 
-//        mockMvc.perform(formLogin("/users/login").user("email", userModel.getEmail()).password(userModel.getPassword()))
-//                .andExpect(authenticated().withRoles("USER")).andDo(print());
+
+        mockMvc.perform(formLogin("/users/login").user("email", userModel.getEmail()).password(userModel.getPassword()))
+                .andExpect(authenticated().withRoles("USER")).andDo(print());
 
         mockMvc.perform(logout("/users/logout")).andExpect(unauthenticated());
 
