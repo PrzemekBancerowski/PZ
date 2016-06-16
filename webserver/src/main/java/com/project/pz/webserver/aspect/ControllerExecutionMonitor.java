@@ -41,18 +41,18 @@ public class ControllerExecutionMonitor {
         logger.info(sub.replace("[${" + CLASS_NAME + "}] execution of method ${" + METHOD_NAME + "} with params: (${" + METHOD_PARAMS + "}) ..."));
     }
 
-    @Around("execution(* com.project.pz.webserver.controller.*.*(..))")
-    public Object logExecutionTime(ProceedingJoinPoint joinPoint) throws Throwable {
-        stopWatch.start();
-        Object retVal = joinPoint.proceed();
-        stopWatch.stop();
-
-        Map<String, String> params = getParamsMap(joinPoint);
-        params.put(EXECUTION_TIME, "" + stopWatch.getTotalTimeMillis());
-        StrSubstitutor sub = new StrSubstitutor(params);
-        logger.info(sub.replace("[${" + CLASS_NAME + "}] execution of method ${" + METHOD_NAME + "} with params: (${" + METHOD_PARAMS + "}) completed in ${" + EXECUTION_TIME + "} ms."));
-        return retVal;
-    }
+//    @Around("execution(* com.project.pz.webserver.controller.*.*(..))")
+//    public Object logExecutionTime(ProceedingJoinPoint joinPoint) throws Throwable {
+//        stopWatch.start();
+//        Object retVal = joinPoint.proceed();
+//        stopWatch.stop();
+//
+//        Map<String, String> params = getParamsMap(joinPoint);
+//        params.put(EXECUTION_TIME, "" + stopWatch.getTotalTimeMillis());
+//        StrSubstitutor sub = new StrSubstitutor(params);
+//        logger.info(sub.replace("[${" + CLASS_NAME + "}] execution of method ${" + METHOD_NAME + "} with params: (${" + METHOD_PARAMS + "}) completed in ${" + EXECUTION_TIME + "} ms."));
+//        return retVal;
+//    }
 
     @AfterThrowing(value = "execution(* com.project.pz.webserver.controller.*.*(..))",
             throwing = "ex", argNames = "joinPoint,ex")
